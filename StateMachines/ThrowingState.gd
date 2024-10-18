@@ -4,6 +4,7 @@ class_name ThrowingState extends State
 @export var stop_throw_button: Button
 @export var throw_dice_container: Container
 @export var dice_animation: AnimatedSprite2D
+@export var prompt_label: Label
 
 var _dice_textures_to_value: Dictionary = {}
 
@@ -12,6 +13,7 @@ func enter(data := {}) -> void:
 	(self._state_machine as TurnStateMachine)._dices_frequency.clear()
 	throw_dice_button.disabled = true
 	stop_throw_button.disabled = true
+	prompt_label.hide()
 	_start_throw()
 
 func _start_throw():
@@ -32,6 +34,10 @@ func _end_throw():
 		func(dice): return _is_allowed_to_keep(dice))
 	if allowed_dices.is_empty():
 		state_machine._change_to_state("StopThrowState", { 'invalid_thrown': true })
+		prompt_label.text = "Invalid throw!"
+	else:
+		prompt_label.text = "Click on a dice to keep it"
+	prompt_label.show()
 
 func _store_dice_frequency(dice: int) -> void:
 	var dices_frequency: Dictionary = (self._state_machine as TurnStateMachine)._dices_frequency

@@ -4,6 +4,7 @@ class_name KeepDiceState extends State
 @export var throw_dice_container: Container
 @export var keep_dice_container: Container
 @export var total_label: Label
+@export var prompt_label: Label
 
 var _keep_dice: int = 0
 var _dice_textures_to_value: Dictionary = {}
@@ -15,11 +16,14 @@ func enter(data := {}) -> void:
 	_move_textures_to_keep_container()
 	state_machine._kept_dices[_keep_dice] = state_machine._dices_frequency[_keep_dice]
 	state_machine._nr_dices_left = state_machine._nr_dices_left - state_machine._kept_dices[_keep_dice]
-	total_label.text = "Total: " + str(_get_sum(state_machine._kept_dices))
+	state_machine._current_points = _get_sum(state_machine._kept_dices)
+	total_label.text = "Total: " + str(state_machine._current_points)
 	total_label.show()
 	if state_machine._nr_dices_left <= 0:
+		prompt_label.text = "Out of dice"
 		self._state_machine._change_to_state("StopThrowState", { 'invalid_thrown': false })
 	else:
+		prompt_label.text = "Throw the dice!"
 		self._state_machine._change_to_state("WaitRethrowState")
 
 func _move_textures_to_keep_container() -> void:

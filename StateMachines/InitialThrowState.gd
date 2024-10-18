@@ -4,8 +4,8 @@ class_name InitialThrowState extends State
 @export var stop_throw_button: Button
 @export var throw_dice_container: Container
 @export var keep_dice_container: Container
-@export var message_label: Label
 @export var total_label: Label
+@export var prompt_label: Label
 
 func enter(data := {}) -> void:
 	throw_dice_button.show()
@@ -13,8 +13,9 @@ func enter(data := {}) -> void:
 	stop_throw_button.disabled = true
 	_clear_container(throw_dice_container)
 	_clear_container(keep_dice_container)
-	message_label.hide()
 	total_label.hide()
+	prompt_label.text = "Throw the dice!"
+	prompt_label.show()
 
 func _on_throw_dice_button_down():
 	self._state_machine._change_to_state("ThrowingState")
