@@ -18,13 +18,6 @@ config/icon="res://icon.svg"
 [autoload]
 
 PlayerControllerSingleton="*res://Scripts/PlayerController.gd"
-SceneChangerSingleton="*res://Scripts/SceneChanger.gd"
-DeckControllerSingleton="*res://Scripts/DeckController.gd"
-
-[display]
-
-window/size/viewport_width=640
-window/size/viewport_height=360
 
 [rendering]
 

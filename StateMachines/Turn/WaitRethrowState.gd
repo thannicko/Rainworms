@@ -18,7 +18,7 @@ func _on_throw_dice_button_down():
 	self._state_machine._change_to_state("ThrowingState")
 
 func _on_stop_throw_button_down():
-	self._state_machine._change_to_state("StopThrowState", { 'invalid_thrown': false })
+	self._state_machine._change_to_state("StopThrowState")
 
 func _clear_container(container: Container) -> void:
 	for child in container.get_children():

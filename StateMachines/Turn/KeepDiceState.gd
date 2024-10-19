@@ -18,12 +18,10 @@ func enter(data := {}) -> void:
 	_move_textures_to_keep_container()
 	state_machine._kept_dices[_keep_dice] = state_machine._dices_frequency[_keep_dice]
 	state_machine._nr_dices_left = state_machine._nr_dices_left - state_machine._kept_dices[_keep_dice]
-	state_machine._current_points = _get_points_earned(state_machine._kept_dices)
-	total_label.text = "Total: " + str(state_machine._current_points)
-	total_label.show()
+	state_machine.set_points_earned(_get_points_earned(state_machine._kept_dices))
 	if state_machine._nr_dices_left <= 0:
 		prompt_label.text = "Out of dice"
-		self._state_machine._change_to_state("StopThrowState", { 'invalid_thrown': false })
+		self._state_machine._change_to_state("StopThrowState")
 	else:
 		prompt_label.text = "Throw the dice!"
 		self._state_machine._change_to_state("WaitRethrowState")

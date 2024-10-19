@@ -1,21 +1,76 @@
-[gd_scene load_steps=3 format=3 uid="uid://cjktffiqp51c6"]
+[gd_scene load_steps=3 format=3 uid="uid://hwv0om0j320d"]
 
-[ext_resource type="Script" path="res://Scripts/TileStore.gd" id="1_5u3w7"]
+[sub_resource type="GDScript" id="GDScript_bdggi"]
+script/source = "#extends Control
+#
+#@export var prompt_label: Label
+#@export var tile_container: Container
+#@export var total_label: Label
+#@export var owned_tiles_button: Button
+#@export var owned_tiles_panel: Panel
+#@export var owned_tiles_container: Container
+#
+#var _available_tiles: Array[WormTile]
+#var _player := Player.new()
+#
+#func initialize(data = {}) -> void:
+	#_player = data['player']
+#
+#func _ready() -> void:
+	#_available_tiles = DeckControllerSingleton.available_tiles()
+	#prompt_label.text = \"Select tile to buy: \"
+	#_update_total_label()
+	#owned_tiles_button.button_down.connect(_show_owned_tiles)
+	#for tile in _available_tiles:
+		#_spawn_button(tile)
+#
+#func _tile_bought(tile: WormTile) -> void:
+	#prompt_label.text = \"Bought tile: \" + str(tile.display_details())
+	#_player.buy_tile(tile)
+	#DeckControllerSingleton.remove_tile(tile)
+	#_update_total_label()
+	#_disable_all_buttons()
+#
+#func _is_tile_affordable(tile: WormTile) -> bool:
+	#return tile.cost <= _player.points_earned_in_turn
+#
+#func _update_total_label() -> void:
+	#total_label.text = \"Total: \" + str(_player.points_earned_in_turn)
+#
+#func _show_owned_tiles() -> void:
+	#owned_tiles_panel.visible = not owned_tiles_panel.visible
+	##TODO: Maybe not respawn every time?
+	#for tile in owned_tiles_container.get_children():
+		#tile.queue_free()
+		#await get_tree().process_frame
+	#for tile in _player.tiles_bought:
+		#var button := Button.new()
+		#button.text = str(tile.buy_details())
+		#button.custom_minimum_size = Vector2(75, 50)
+		#owned_tiles_container.add_child(button)
+#
+#func _spawn_button(tile: WormTile) -> void:
+	#var button := Button.new()
+	#button.text = str(tile.buy_details())
+	#button.custom_minimum_size = Vector2(75, 50)
+	#button.disabled = not _is_tile_affordable(tile)
+	#if (_is_tile_affordable(tile)):
+		#button.button_down.connect(_tile_bought.bind(tile))
+	#tile_container.add_child(button)
+	#
+#func _disable_all_buttons() -> void:
+	#for tile in tile_container.get_children():
+		#tile.disabled = true
+"
 
 [sub_resource type="StyleBoxFlat" id="StyleBoxFlat_ffav3"]
 bg_color = Color(0.122252, 0.122252, 0.122252, 1)
 border_width_left = 5
 
-[node name="TileStore" type="Control" node_paths=PackedStringArray("prompt_label", "tile_container", "total_label", "owned_tiles_button", "owned_tiles_panel", "owned_tiles_container")]
+[node name="TileStore" type="Control"]
 layout_mode = 3
 anchors_preset = 0
-script = ExtResource("1_5u3w7")
-prompt_label = NodePath("Background/MarginContainer/BuyingContainer/PromptLabel")
-tile_container = NodePath("Background/MarginContainer/BuyingContainer/TileContainer")
-total_label = NodePath("Background/TotalLabel")
-owned_tiles_button = NodePath("Background/OwnedTilesButton")
-owned_tiles_panel = NodePath("Background/OwnedTilesPanel")
-owned_tiles_container = NodePath("Background/OwnedTilesPanel/OwnedTilesContainer")
+script = SubResource("GDScript_bdggi")
 
 [node name="Background" type="Panel" parent="."]
 layout_mode = 0

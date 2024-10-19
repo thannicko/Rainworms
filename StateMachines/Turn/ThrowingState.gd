@@ -33,10 +33,8 @@ func _end_throw():
 	var allowed_dices: Array = state_machine._dices_frequency.keys().filter(
 		func(dice): return _is_allowed_to_keep(dice))
 	if allowed_dices.is_empty():
-		state_machine._change_to_state("StopThrowState", { 
-			'invalid_thrown': true,
-			'invalid_throw_type': TurnStateMachine.InvalidThrowType.NO_DICES })
-		prompt_label.text = "Invalid throw!"
+		state_machine.invalidate_throw(TurnStateMachine.InvalidThrowType.NO_DICES)
+		state_machine._change_to_state("StopThrowState")
 	else:
 		prompt_label.text = "Click on a dice to keep it"
 	prompt_label.show()
@@ -56,7 +54,7 @@ func _spawn_dice_texture(dice: int) -> void:
 	if _is_allowed_to_keep(dice):
 		new_dice.gui_input.connect(_on_gui_input_dice.bind(dice))
 	else:
-		new_dice.modulate = Color.GRAY
+		new_dice.modulate = Color.WEB_GRAY
 	throw_dice_container.add_child(new_dice)
 	_dice_textures_to_value[new_dice] = dice
 
