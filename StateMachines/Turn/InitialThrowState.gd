@@ -8,14 +8,16 @@ class_name InitialThrowState extends State
 @export var prompt_label: Label
 
 func enter(data := {}) -> void:
-	throw_dice_button.show()
-	throw_dice_button.button_down.connect(_on_throw_dice_button_down)
-	stop_throw_button.disabled = true
+	#TODO Someone else should set our player
+	(self._state_machine as TurnStateMachine)._player = PlayerControllerSingleton._active_player
 	_clear_container(throw_dice_container)
 	_clear_container(keep_dice_container)
-	total_label.hide()
+	throw_dice_button.button_down.connect(_on_throw_dice_button_down)
+	stop_throw_button.disabled = true
 	prompt_label.text = "Throw the dice!"
 	prompt_label.show()
+	throw_dice_button.show()
+	total_label.hide()
 
 func _on_throw_dice_button_down():
 	self._state_machine._change_to_state("ThrowingState")

@@ -1,7 +1,7 @@
-[gd_resource type="Resource" script_class="TileDeck" load_steps=8 format=3 uid="uid://bs3ukpatlc1ly"]
+[gd_resource type="Resource" script_class="TileDeck" load_steps=19 format=3 uid="uid://bs3ukpatlc1ly"]
 
-[ext_resource type="Script" path="res://TileDeck.gd" id="1_ax2ob"]
-[ext_resource type="Script" path="res://WormTile.gd" id="2_466vf"]
+[ext_resource type="Script" path="res://Scripts/TileDeck.gd" id="1_ax2ob"]
+[ext_resource type="Script" path="res://Scripts/WormTile.gd" id="2_466vf"]
 
 [sub_resource type="Resource" id="Resource_0dlmq"]
 script = ExtResource("2_466vf")
@@ -28,6 +28,61 @@ script = ExtResource("2_466vf")
 cost = 25
 worm = 2
 
+[sub_resource type="Resource" id="Resource_o7st6"]
+script = ExtResource("2_466vf")
+cost = 26
+worm = 2
+
+[sub_resource type="Resource" id="Resource_43ifj"]
+script = ExtResource("2_466vf")
+cost = 27
+worm = 2
+
+[sub_resource type="Resource" id="Resource_gmpoh"]
+script = ExtResource("2_466vf")
+cost = 28
+worm = 2
+
+[sub_resource type="Resource" id="Resource_i4gcw"]
+script = ExtResource("2_466vf")
+cost = 29
+worm = 3
+
+[sub_resource type="Resource" id="Resource_f5sat"]
+script = ExtResource("2_466vf")
+cost = 30
+worm = 3
+
+[sub_resource type="Resource" id="Resource_g1y7h"]
+script = ExtResource("2_466vf")
+cost = 31
+worm = 3
+
+[sub_resource type="Resource" id="Resource_xgr8s"]
+script = ExtResource("2_466vf")
+cost = 32
+worm = 3
+
+[sub_resource type="Resource" id="Resource_vi3ao"]
+script = ExtResource("2_466vf")
+cost = 33
+worm = 4
+
+[sub_resource type="Resource" id="Resource_cojh8"]
+script = ExtResource("2_466vf")
+cost = 34
+worm = 4
+
+[sub_resource type="Resource" id="Resource_r7oih"]
+script = ExtResource("2_466vf")
+cost = 35
+worm = 4
+
+[sub_resource type="Resource" id="Resource_pmctv"]
+script = ExtResource("2_466vf")
+cost = 36
+worm = 4
+
 [resource]
 script = ExtResource("1_ax2ob")
-tiles = Array[ExtResource("2_466vf")]([SubResource("Resource_0dlmq"), SubResource("Resource_m25vj"), SubResource("Resource_soeys"), SubResource("Resource_6jrwq"), SubResource("Resource_igpyq")])
+tiles = Array[ExtResource("2_466vf")]([SubResource("Resource_0dlmq"), SubResource("Resource_m25vj"), SubResource("Resource_soeys"), SubResource("Resource_6jrwq"), SubResource("Resource_igpyq"), SubResource("Resource_o7st6"), SubResource("Resource_43ifj"), SubResource("Resource_gmpoh"), SubResource("Resource_i4gcw"), SubResource("Resource_f5sat"), SubResource("Resource_g1y7h"), SubResource("Resource_xgr8s"), SubResource("Resource_vi3ao"), SubResource("Resource_cojh8"), SubResource("Resource_r7oih"), SubResource("Resource_pmctv")])

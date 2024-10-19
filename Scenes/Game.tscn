@@ -1,36 +1,37 @@
-[gd_scene load_steps=16 format=3 uid="uid://c4r3anhiqbtsa"]
+[gd_scene load_steps=17 format=3 uid="uid://c4r3anhiqbtsa"]
 
-[ext_resource type="Texture2D" uid="uid://b4j6dlwlo8ti0" path="res://Assets/six sided die.png" id="1_jdr56"]
-[ext_resource type="Texture2D" uid="uid://ce63oontdi3a3" path="res://Assets/dice-six.png" id="2_cw40v"]
-[ext_resource type="Script" path="res://StateMachines/Turn/ThrowingState.gd" id="3_prpp6"]
-[ext_resource type="Script" path="res://StateMachines/Turn/InitialThrowState.gd" id="3_wt06b"]
-[ext_resource type="Script" path="res://StateMachines/Turn/KeepDiceState.gd" id="4_44m0x"]
-[ext_resource type="Script" path="res://StateMachines/Turn/TurnStateMachine.gd" id="4_wg6hm"]
-[ext_resource type="Script" path="res://StateMachines/Turn/WaitRethrowState.gd" id="5_a40jr"]
-[ext_resource type="Script" path="res://StateMachines/Turn/StopThrowState.gd" id="6_a506q"]
+[ext_resource type="Script" path="res://StateMachines/Turn/TurnStateMachine.gd" id="1_o8pd1"]
+[ext_resource type="Script" path="res://StateMachines/Turn/InitialThrowState.gd" id="2_avjjy"]
+[ext_resource type="Script" path="res://StateMachines/Turn/WaitRethrowState.gd" id="3_3xqk5"]
+[ext_resource type="Script" path="res://StateMachines/Turn/ThrowingState.gd" id="4_e26gu"]
+[ext_resource type="Script" path="res://StateMachines/Turn/KeepDiceState.gd" id="5_5yqc1"]
+[ext_resource type="Script" path="res://StateMachines/Turn/StopThrowState.gd" id="6_l6rxv"]
+[ext_resource type="PackedScene" uid="uid://cjktffiqp51c6" path="res://Scenes/TileStore.tscn" id="7_0rqho"]
+[ext_resource type="Texture2D" uid="uid://ce63oontdi3a3" path="res://Assets/dice-six.png" id="7_ekxhj"]
+[ext_resource type="Texture2D" uid="uid://b4j6dlwlo8ti0" path="res://Assets/six sided die.png" id="8_1koic"]
 
 [sub_resource type="AtlasTexture" id="AtlasTexture_eq1d3"]
-atlas = ExtResource("1_jdr56")
+atlas = ExtResource("8_1koic")
 region = Rect2(0, 224, 16, 16)
 
 [sub_resource type="AtlasTexture" id="AtlasTexture_modug"]
-atlas = ExtResource("1_jdr56")
+atlas = ExtResource("8_1koic")
 region = Rect2(16, 224, 16, 16)
 
 [sub_resource type="AtlasTexture" id="AtlasTexture_e3tug"]
-atlas = ExtResource("1_jdr56")
+atlas = ExtResource("8_1koic")
 region = Rect2(32, 224, 16, 16)
 
 [sub_resource type="AtlasTexture" id="AtlasTexture_8yq78"]
-atlas = ExtResource("1_jdr56")
+atlas = ExtResource("8_1koic")
 region = Rect2(48, 224, 16, 16)
 
 [sub_resource type="AtlasTexture" id="AtlasTexture_ehok7"]
-atlas = ExtResource("1_jdr56")
+atlas = ExtResource("8_1koic")
 region = Rect2(64, 224, 16, 16)
 
 [sub_resource type="AtlasTexture" id="AtlasTexture_1nyp4"]
-atlas = ExtResource("1_jdr56")
+atlas = ExtResource("8_1koic")
 region = Rect2(80, 224, 16, 16)
 
 [sub_resource type="SpriteFrames" id="SpriteFrames_71bwo"]
@@ -64,10 +65,10 @@ layout_mode = 3
 anchors_preset = 0
 
 [node name="TurnStateMachine" type="Node" parent="."]
-script = ExtResource("4_wg6hm")
+script = ExtResource("1_o8pd1")
 
 [node name="InitialThrowState" type="Node" parent="TurnStateMachine" node_paths=PackedStringArray("throw_dice_button", "stop_throw_button", "throw_dice_container", "keep_dice_container", "total_label", "prompt_label")]
-script = ExtResource("3_wt06b")
+script = ExtResource("2_avjjy")
 throw_dice_button = NodePath("../../Background/MainDiceContainer/HBoxContainer/ThrowDiceButton")
 stop_throw_button = NodePath("../../Background/MainDiceContainer/HBoxContainer/StopThrowButton")
 throw_dice_container = NodePath("../../Background/MainDiceContainer/ThrowDiceMargin/ThrowDiceContainer")
@@ -76,13 +77,13 @@ total_label = NodePath("../../Background/MarginContainer/TotalLabel")
 prompt_label = NodePath("../../Background/MainDiceContainer/PromptLabel")
 
 [node name="WaitRethrowState" type="Node" parent="TurnStateMachine" node_paths=PackedStringArray("throw_dice_button", "stop_throw_button", "throw_dice_container")]
-script = ExtResource("5_a40jr")
+script = ExtResource("3_3xqk5")
 throw_dice_button = NodePath("../../Background/MainDiceContainer/HBoxContainer/ThrowDiceButton")
 stop_throw_button = NodePath("../../Background/MainDiceContainer/HBoxContainer/StopThrowButton")
 throw_dice_container = NodePath("../../Background/MainDiceContainer/ThrowDiceMargin/ThrowDiceContainer")
 
 [node name="ThrowingState" type="Node" parent="TurnStateMachine" node_paths=PackedStringArray("throw_dice_button", "stop_throw_button", "throw_dice_container", "dice_animation", "prompt_label")]
-script = ExtResource("3_prpp6")
+script = ExtResource("4_e26gu")
 throw_dice_button = NodePath("../../Background/MainDiceContainer/HBoxContainer/ThrowDiceButton")
 stop_throw_button = NodePath("../../Background/MainDiceContainer/HBoxContainer/StopThrowButton")
 throw_dice_container = NodePath("../../Background/MainDiceContainer/ThrowDiceMargin/ThrowDiceContainer")
@@ -90,7 +91,7 @@ dice_animation = NodePath("../../Background/MainDiceContainer/DiceThrowAnimation
 prompt_label = NodePath("../../Background/MainDiceContainer/PromptLabel")
 
 [node name="KeepDiceState" type="Node" parent="TurnStateMachine" node_paths=PackedStringArray("stop_throw_button", "throw_dice_container", "keep_dice_container", "total_label", "prompt_label")]
-script = ExtResource("4_44m0x")
+script = ExtResource("5_5yqc1")
 stop_throw_button = NodePath("../../Background/MainDiceContainer/HBoxContainer/StopThrowButton")
 throw_dice_container = NodePath("../../Background/MainDiceContainer/ThrowDiceMargin/ThrowDiceContainer")
 keep_dice_container = NodePath("../../Background/MainDiceContainer/MarginContainer/KeepDiceContainer")
@@ -98,9 +99,10 @@ total_label = NodePath("../../Background/MarginContainer/TotalLabel")
 prompt_label = NodePath("../../Background/MainDiceContainer/PromptLabel")
 
 [node name="StopThrowState" type="Node" parent="TurnStateMachine" node_paths=PackedStringArray("dice_container", "prompt_label")]
-script = ExtResource("6_a506q")
+script = ExtResource("6_l6rxv")
 dice_container = NodePath("../../Background/MainDiceContainer")
 prompt_label = NodePath("../../Background/MainDiceContainer/PromptLabel")
+tile_store_scene = ExtResource("7_0rqho")
 
 [node name="Background" type="Panel" parent="."]
 layout_mode = 0
@@ -149,22 +151,22 @@ alignment = 1
 
 [node name="TextureRect" type="TextureRect" parent="Background/MainDiceContainer/ThrowDiceMargin/ThrowDiceContainer"]
 layout_mode = 2
-texture = ExtResource("2_cw40v")
+texture = ExtResource("7_ekxhj")
 expand_mode = 3
 
 [node name="TextureRect2" type="TextureRect" parent="Background/MainDiceContainer/ThrowDiceMargin/ThrowDiceContainer"]
 layout_mode = 2
-texture = ExtResource("2_cw40v")
+texture = ExtResource("7_ekxhj")
 expand_mode = 3
 
 [node name="TextureRect3" type="TextureRect" parent="Background/MainDiceContainer/ThrowDiceMargin/ThrowDiceContainer"]
 layout_mode = 2
-texture = ExtResource("2_cw40v")
+texture = ExtResource("7_ekxhj")
 expand_mode = 3
 
 [node name="TextureRect4" type="TextureRect" parent="Background/MainDiceContainer/ThrowDiceMargin/ThrowDiceContainer"]
 layout_mode = 2
-texture = ExtResource("2_cw40v")
+texture = ExtResource("7_ekxhj")
 expand_mode = 3
 
 [node name="DiceThrowAnimation" type="AnimatedSprite2D" parent="Background/MainDiceContainer"]
@@ -199,20 +201,20 @@ alignment = 1
 
 [node name="TextureRect" type="TextureRect" parent="Background/MainDiceContainer/MarginContainer/KeepDiceContainer"]
 layout_mode = 2
-texture = ExtResource("2_cw40v")
+texture = ExtResource("7_ekxhj")
 expand_mode = 3
 
 [node name="TextureRect2" type="TextureRect" parent="Background/MainDiceContainer/MarginContainer/KeepDiceContainer"]
 layout_mode = 2
-texture = ExtResource("2_cw40v")
+texture = ExtResource("7_ekxhj")
 expand_mode = 3
 
 [node name="TextureRect3" type="TextureRect" parent="Background/MainDiceContainer/MarginContainer/KeepDiceContainer"]
 layout_mode = 2
-texture = ExtResource("2_cw40v")
+texture = ExtResource("7_ekxhj")
 expand_mode = 3
 
 [node name="TextureRect4" type="TextureRect" parent="Background/MainDiceContainer/MarginContainer/KeepDiceContainer"]
 layout_mode = 2
-texture = ExtResource("2_cw40v")
+texture = ExtResource("7_ekxhj")
 expand_mode = 3

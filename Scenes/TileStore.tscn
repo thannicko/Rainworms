@@ -1,0 +1,79 @@
+[gd_scene load_steps=3 format=3 uid="uid://cjktffiqp51c6"]
+
+[ext_resource type="Script" path="res://Scripts/TileStore.gd" id="1_5u3w7"]
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_ffav3"]
+bg_color = Color(0.122252, 0.122252, 0.122252, 1)
+border_width_left = 5
+
+[node name="TileStore" type="Control" node_paths=PackedStringArray("prompt_label", "tile_container", "total_label", "owned_tiles_button", "owned_tiles_panel", "owned_tiles_container")]
+layout_mode = 3
+anchors_preset = 0
+script = ExtResource("1_5u3w7")
+prompt_label = NodePath("Background/MarginContainer/BuyingContainer/PromptLabel")
+tile_container = NodePath("Background/MarginContainer/BuyingContainer/TileContainer")
+total_label = NodePath("Background/TotalLabel")
+owned_tiles_button = NodePath("Background/OwnedTilesButton")
+owned_tiles_panel = NodePath("Background/OwnedTilesPanel")
+owned_tiles_container = NodePath("Background/OwnedTilesPanel/OwnedTilesContainer")
+
+[node name="Background" type="Panel" parent="."]
+layout_mode = 0
+offset_right = 640.0
+offset_bottom = 360.0
+
+[node name="MarginContainer" type="MarginContainer" parent="Background"]
+custom_minimum_size = Vector2(640, 360)
+layout_mode = 0
+offset_right = 40.0
+offset_bottom = 40.0
+theme_override_constants/margin_left = 10
+theme_override_constants/margin_right = 10
+
+[node name="BuyingContainer" type="VBoxContainer" parent="Background/MarginContainer"]
+layout_mode = 2
+alignment = 1
+
+[node name="PromptLabel" type="Label" parent="Background/MarginContainer/BuyingContainer"]
+layout_mode = 2
+text = "Select a tile to buy:"
+horizontal_alignment = 1
+
+[node name="TileContainer" type="HFlowContainer" parent="Background/MarginContainer/BuyingContainer"]
+custom_minimum_size = Vector2(0, 200)
+layout_mode = 2
+
+[node name="OwnedTilesButton" type="Button" parent="Background"]
+layout_mode = 2
+offset_left = 10.0
+offset_top = 319.0
+offset_right = 110.0
+offset_bottom = 350.0
+grow_vertical = 0
+text = "Owned tiles"
+
+[node name="TotalLabel" type="Label" parent="Background"]
+layout_mode = 2
+offset_left = 546.0
+offset_top = 327.0
+offset_right = 590.0
+offset_bottom = 350.0
+size_flags_horizontal = 0
+size_flags_vertical = 1
+text = "Total:"
+
+[node name="OwnedTilesPanel" type="Panel" parent="Background"]
+visible = false
+layout_mode = 0
+offset_left = 10.0
+offset_top = 15.0
+offset_right = 630.0
+offset_bottom = 315.0
+theme_override_styles/panel = SubResource("StyleBoxFlat_ffav3")
+
+[node name="OwnedTilesContainer" type="HBoxContainer" parent="Background/OwnedTilesPanel"]
+layout_mode = 0
+offset_left = 10.0
+offset_top = 10.0
+offset_right = 94.0
+offset_bottom = 60.0
