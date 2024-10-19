@@ -1,7 +1,6 @@
 class_name ThrowingState extends State
 
 @export var throw_dice_button: Button
-@export var stop_throw_button: Button
 @export var throw_dice_container: Container
 @export var dice_animation: AnimatedSprite2D
 @export var prompt_label: Label
@@ -12,7 +11,6 @@ func enter(data := {}) -> void:
 	_dice_textures_to_value.clear()
 	(self._state_machine as TurnStateMachine)._dices_frequency.clear()
 	throw_dice_button.disabled = true
-	stop_throw_button.disabled = true
 	prompt_label.hide()
 	_start_throw()
 

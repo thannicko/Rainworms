@@ -21,9 +21,10 @@ func has_nothing_to_buy() -> bool:
 func set_enable_buying(enabled: bool) -> void:
 	_buying_enabled = enabled
 
-func _refresh(new_points: int) -> void:
+func _refresh(new_points: int, has_no_worms: bool) -> void:
 	for button in tiles_container.get_children():
 		button.disabled = _is_tile_too_expensive(_button_to_tile[button], new_points)
+		button.disabled = button.disabled or has_no_worms
 
 func _is_tile_too_expensive(tile: WormTile, points: int) -> bool:
 	return tile.cost > points

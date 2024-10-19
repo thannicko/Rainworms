@@ -1,7 +1,6 @@
 class_name InitialThrowState extends State
 
 @export var throw_dice_button: Button
-@export var stop_throw_button: Button
 @export var throw_dice_container: Container
 @export var keep_dice_container: Container
 @export var total_label: Label
@@ -15,7 +14,6 @@ func enter(data := {}) -> void:
 	
 	throw_dice_button.disabled = false
 	throw_dice_button.button_down.connect(_on_throw_dice_button_down)
-	stop_throw_button.disabled = true
 	
 	prompt_label.text = "Throw the dice!"
 	prompt_label.show()

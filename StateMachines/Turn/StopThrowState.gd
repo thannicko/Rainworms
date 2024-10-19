@@ -2,12 +2,10 @@ class_name StopThrowState extends State
 
 @export var prompt_label: Label
 @export var throw_dice_button: Button
-@export var stop_throw_button: Button
 @export var deck_controller: DeckController
 
 func enter(data := {}) -> void:
 	throw_dice_button.disabled = true
-	stop_throw_button.disabled = true
 	
 	var state_machine := (self._state_machine as TurnStateMachine)
 	if state_machine._has_no_worms():

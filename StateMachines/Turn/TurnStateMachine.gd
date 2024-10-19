@@ -3,7 +3,7 @@ class_name TurnStateMachine extends StateMachine
 const MaxThrows: int = 8
 const Worm: int = 6
 
-signal points_earned(new_points: int)
+signal points_earned(new_points: int, has_no_worms: bool)
 
 const _dice_textures: Dictionary = {
 	1: "res://Assets/dice-one.png",
@@ -36,7 +36,7 @@ var _player: Player
 func set_points_earned(points: int) -> void:
 	_player.points_earned_in_turn = points
 	_update_total_label(_player.points_earned_in_turn)
-	points_earned.emit(_player.points_earned_in_turn)
+	points_earned.emit(_player.points_earned_in_turn, _has_no_worms())
 
 func get_points_earned() -> int:
 	return _player.points_earned_in_turn

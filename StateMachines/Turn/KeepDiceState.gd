@@ -1,6 +1,5 @@
 class_name KeepDiceState extends State
 
-@export var stop_throw_button: Button
 @export var throw_dice_container: Container
 @export var keep_dice_container: Container
 
