@@ -11,7 +11,7 @@ const _dice_textures: Dictionary = {
 	3: "res://Assets/dice-three.png",
 	4: "res://Assets/dice-four.png",
 	5: "res://Assets/dice-five.png",
-	6: "res://Assets/worm.png"
+	6: "res://Assets/dice-worm.png"
 }
 
 const _dice_side_to_points: Dictionary = {

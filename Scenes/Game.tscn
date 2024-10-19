@@ -7,8 +7,8 @@
 [ext_resource type="Script" path="res://StateMachines/Turn/ThrowingState.gd" id="4_e26gu"]
 [ext_resource type="Script" path="res://StateMachines/Turn/KeepDiceState.gd" id="5_5yqc1"]
 [ext_resource type="Script" path="res://StateMachines/Turn/StopThrowState.gd" id="6_l6rxv"]
-[ext_resource type="Texture2D" uid="uid://ce63oontdi3a3" path="res://Assets/dice-six.png" id="7_ekxhj"]
 [ext_resource type="Texture2D" uid="uid://b4j6dlwlo8ti0" path="res://Assets/six sided die.png" id="8_1koic"]
+[ext_resource type="Texture2D" uid="uid://cjlia5ygewjeq" path="res://Assets/dice-worm.png" id="9_3hr2b"]
 [ext_resource type="Script" path="res://StateMachines/Turn/BuyingTileState.gd" id="9_an0x8"]
 
 [sub_resource type="StyleBoxFlat" id="StyleBoxFlat_oy2md"]
@@ -171,22 +171,7 @@ alignment = 1
 
 [node name="TextureRect" type="TextureRect" parent="CanvasLayer/KeepDiceContianer/KeepDiceContainer"]
 layout_mode = 2
-texture = ExtResource("7_ekxhj")
-expand_mode = 3
-
-[node name="TextureRect2" type="TextureRect" parent="CanvasLayer/KeepDiceContianer/KeepDiceContainer"]
-layout_mode = 2
-texture = ExtResource("7_ekxhj")
-expand_mode = 3
-
-[node name="TextureRect3" type="TextureRect" parent="CanvasLayer/KeepDiceContianer/KeepDiceContainer"]
-layout_mode = 2
-texture = ExtResource("7_ekxhj")
-expand_mode = 3
-
-[node name="TextureRect4" type="TextureRect" parent="CanvasLayer/KeepDiceContianer/KeepDiceContainer"]
-layout_mode = 2
-texture = ExtResource("7_ekxhj")
+texture = ExtResource("9_3hr2b")
 expand_mode = 3
 
 [node name="TotalLabel" type="Label" parent="CanvasLayer/KeepDiceContianer"]
@@ -216,22 +201,7 @@ alignment = 1
 
 [node name="TextureRect" type="TextureRect" parent="CanvasLayer/ThrowDiceMargin/ThrowDiceContainer"]
 layout_mode = 2
-texture = ExtResource("7_ekxhj")
-expand_mode = 3
-
-[node name="TextureRect2" type="TextureRect" parent="CanvasLayer/ThrowDiceMargin/ThrowDiceContainer"]
-layout_mode = 2
-texture = ExtResource("7_ekxhj")
-expand_mode = 3
-
-[node name="TextureRect3" type="TextureRect" parent="CanvasLayer/ThrowDiceMargin/ThrowDiceContainer"]
-layout_mode = 2
-texture = ExtResource("7_ekxhj")
-expand_mode = 3
-
-[node name="TextureRect4" type="TextureRect" parent="CanvasLayer/ThrowDiceMargin/ThrowDiceContainer"]
-layout_mode = 2
-texture = ExtResource("7_ekxhj")
+texture = ExtResource("9_3hr2b")
 expand_mode = 3
 
 [node name="DiceThrowAnimation" type="AnimatedSprite2D" parent="CanvasLayer"]
