@@ -19,6 +19,7 @@ config/icon="res://icon.svg"
 
 PlayerControllerSingleton="*res://Scripts/PlayerController.gd"
 SceneChangerSingleton="*res://Scripts/SceneChanger.gd"
+DeckControllerSingleton="*res://Scripts/DeckController.gd"
 
 [display]
 

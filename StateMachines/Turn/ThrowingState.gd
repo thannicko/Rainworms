@@ -33,7 +33,9 @@ func _end_throw():
 	var allowed_dices: Array = state_machine._dices_frequency.keys().filter(
 		func(dice): return _is_allowed_to_keep(dice))
 	if allowed_dices.is_empty():
-		state_machine._change_to_state("StopThrowState", { 'invalid_thrown': true })
+		state_machine._change_to_state("StopThrowState", { 
+			'invalid_thrown': true,
+			'invalid_throw_type': TurnStateMachine.InvalidThrowType.NO_DICES })
 		prompt_label.text = "Invalid throw!"
 	else:
 		prompt_label.text = "Click on a dice to keep it"

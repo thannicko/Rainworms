@@ -6,7 +6,7 @@ func _ready() -> void:
 	_current_scene = get_tree().current_scene
 
 func change_to_scene(scene: PackedScene, data := {}) -> void:
-	print("SceneCHanger ::  Changed to '", scene.resource_path, "' with data ", data)
+	print("SceneChanger ::  Changed to '", scene.resource_path, "' with data ", data)
 	_current_scene.free()
 	var new_scene := scene.instantiate()
 	if new_scene.has_method("initialize"):

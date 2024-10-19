@@ -7,22 +7,24 @@ extends Control
 @export var owned_tiles_panel: Panel
 @export var owned_tiles_container: Container
 
-var _deck: TileDeck = load("res://Deck.tres")
+var _available_tiles: Array[WormTile]
 var _player := Player.new()
 
 func initialize(data = {}) -> void:
 	_player = data['player']
 
 func _ready() -> void:
+	_available_tiles = DeckControllerSingleton.available_tiles()
 	prompt_label.text = "Select tile to buy: "
 	_update_total_label()
 	owned_tiles_button.button_down.connect(_show_owned_tiles)
-	for tile in _deck.tiles:
+	for tile in _available_tiles:
 		_spawn_button(tile)
 
 func _tile_bought(tile: WormTile) -> void:
 	prompt_label.text = "Bought tile: " + str(tile.display_details())
 	_player.buy_tile(tile)
+	DeckControllerSingleton.remove_tile(tile)
 	_update_total_label()
 	_disable_all_buttons()
 
