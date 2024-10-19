@@ -171,6 +171,7 @@ expand_mode = 3
 
 [node name="DiceThrowAnimation" type="AnimatedSprite2D" parent="Background/MainDiceContainer"]
 visible = false
+texture_filter = 1
 position = Vector2(318, 88)
 scale = Vector2(3, 3)
 sprite_frames = SubResource("SpriteFrames_71bwo")

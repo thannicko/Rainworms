@@ -49,6 +49,7 @@ func _store_dice_frequency(dice: int) -> void:
 func _spawn_dice_texture(dice: int) -> void:
 	var new_dice := TextureRect.new()
 	new_dice.texture = load((self._state_machine as TurnStateMachine)._dice_textures[dice])
+	new_dice.texture_filter = CanvasItem.TEXTURE_FILTER_NEAREST
 	new_dice.expand_mode = TextureRect.EXPAND_FIT_WIDTH_PROPORTIONAL
 	if _is_allowed_to_keep(dice):
 		new_dice.gui_input.connect(_on_gui_input_dice.bind(dice))
