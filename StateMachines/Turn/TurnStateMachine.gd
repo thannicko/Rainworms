@@ -14,5 +14,3 @@ const _dice_textures: Dictionary = {
 	5: "res://Assets/dice-five.png",
 	6: "res://Assets/worm.png"
 }
-
-var _deck: TileDeck = load("res://Deck.tres") as TileDeck

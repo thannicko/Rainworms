@@ -2,12 +2,12 @@
 
 [ext_resource type="Texture2D" uid="uid://b4j6dlwlo8ti0" path="res://Assets/six sided die.png" id="1_jdr56"]
 [ext_resource type="Texture2D" uid="uid://ce63oontdi3a3" path="res://Assets/dice-six.png" id="2_cw40v"]
-[ext_resource type="Script" path="res://StateMachines/ThrowingState.gd" id="3_prpp6"]
-[ext_resource type="Script" path="res://StateMachines/InitialThrowState.gd" id="3_wt06b"]
-[ext_resource type="Script" path="res://StateMachines/KeepDiceState.gd" id="4_44m0x"]
-[ext_resource type="Script" path="res://StateMachines/TurnStateMachine.gd" id="4_wg6hm"]
-[ext_resource type="Script" path="res://StateMachines/WaitRethrowState.gd" id="5_a40jr"]
-[ext_resource type="Script" path="res://StateMachines/StopThrowState.gd" id="6_a506q"]
+[ext_resource type="Script" path="res://StateMachines/Turn/ThrowingState.gd" id="3_prpp6"]
+[ext_resource type="Script" path="res://StateMachines/Turn/InitialThrowState.gd" id="3_wt06b"]
+[ext_resource type="Script" path="res://StateMachines/Turn/KeepDiceState.gd" id="4_44m0x"]
+[ext_resource type="Script" path="res://StateMachines/Turn/TurnStateMachine.gd" id="4_wg6hm"]
+[ext_resource type="Script" path="res://StateMachines/Turn/WaitRethrowState.gd" id="5_a40jr"]
+[ext_resource type="Script" path="res://StateMachines/Turn/StopThrowState.gd" id="6_a506q"]
 
 [sub_resource type="AtlasTexture" id="AtlasTexture_eq1d3"]
 atlas = ExtResource("1_jdr56")
@@ -63,9 +63,8 @@ animations = [{
 layout_mode = 3
 anchors_preset = 0
 
-[node name="TurnStateMachine" type="Node" parent="." node_paths=PackedStringArray("initial_state")]
+[node name="TurnStateMachine" type="Node" parent="."]
 script = ExtResource("4_wg6hm")
-initial_state = NodePath("InitialThrowState")
 
 [node name="InitialThrowState" type="Node" parent="TurnStateMachine" node_paths=PackedStringArray("throw_dice_button", "stop_throw_button", "throw_dice_container", "keep_dice_container", "total_label", "prompt_label")]
 script = ExtResource("3_wt06b")
@@ -98,13 +97,10 @@ keep_dice_container = NodePath("../../Background/MainDiceContainer/MarginContain
 total_label = NodePath("../../Background/MarginContainer/TotalLabel")
 prompt_label = NodePath("../../Background/MainDiceContainer/PromptLabel")
 
-[node name="StopThrowState" type="Node" parent="TurnStateMachine" node_paths=PackedStringArray("dice_container", "buy_container", "tile_container", "dice_prompt_label", "buy_prompt_label")]
+[node name="StopThrowState" type="Node" parent="TurnStateMachine" node_paths=PackedStringArray("dice_container", "prompt_label")]
 script = ExtResource("6_a506q")
 dice_container = NodePath("../../Background/MainDiceContainer")
-buy_container = NodePath("../../Background/BuyingContainer")
-tile_container = NodePath("../../Background/BuyingContainer/TileContainer")
-dice_prompt_label = NodePath("../../Background/MainDiceContainer/PromptLabel")
-buy_prompt_label = NodePath("../../Background/BuyingContainer/PromptLabel")
+prompt_label = NodePath("../../Background/MainDiceContainer/PromptLabel")
 
 [node name="Background" type="Panel" parent="."]
 layout_mode = 0
@@ -220,18 +216,3 @@ expand_mode = 3
 layout_mode = 2
 texture = ExtResource("2_cw40v")
 expand_mode = 3
-
-[node name="BuyingContainer" type="VBoxContainer" parent="Background"]
-visible = false
-offset_right = 640.0
-offset_bottom = 360.0
-alignment = 1
-
-[node name="PromptLabel" type="Label" parent="Background/BuyingContainer"]
-layout_mode = 2
-text = "Select a tile to buy:"
-horizontal_alignment = 1
-
-[node name="TileContainer" type="HBoxContainer" parent="Background/BuyingContainer"]
-layout_mode = 2
-alignment = 1

@@ -1,12 +1,11 @@
 class_name  StateMachine extends Node
 
-@export var initial_state: State
-
 var _current_state: State
 
 func _ready():
 	for state in get_children():
 		(state as State)._state_machine = self
+	var initial_state := get_children()[0]
 	_change_to_state(initial_state.name)
 
 func handle_input(_event: InputEvent) -> void:
