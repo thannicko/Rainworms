@@ -72,15 +72,17 @@ animations = [{
 layout_mode = 3
 anchors_preset = 0
 
-[node name="DeckController" type="Node" parent="." node_paths=PackedStringArray("tiles_container", "turn_controller")]
+[node name="DeckController" type="Node" parent="." node_paths=PackedStringArray("tiles_container", "bought_tiles_container", "turn_controller")]
 script = ExtResource("1_p0fjl")
 tiles_container = NodePath("../CanvasLayer/TileContainer")
+bought_tiles_container = NodePath("../CanvasLayer/BoughtTilesContainer")
 turn_controller = NodePath("../TurnStateMachine")
 
-[node name="TurnStateMachine" type="Node" parent="."]
+[node name="TurnStateMachine" type="Node" parent="." node_paths=PackedStringArray("total_label")]
 script = ExtResource("1_o8pd1")
+total_label = NodePath("../CanvasLayer/KeepDiceContianer/TotalLabel")
 
-[node name="InitialThrowState" type="Node" parent="TurnStateMachine" node_paths=PackedStringArray("throw_dice_button", "stop_throw_button", "throw_dice_container", "keep_dice_container", "total_label", "prompt_label")]
+[node name="InitialThrowState" type="Node" parent="TurnStateMachine" node_paths=PackedStringArray("throw_dice_button", "stop_throw_button", "throw_dice_container", "keep_dice_container", "total_label", "prompt_label", "player_name_label")]
 script = ExtResource("2_avjjy")
 throw_dice_button = NodePath("../../CanvasLayer/ActionsContainer/ThrowDiceButton")
 stop_throw_button = NodePath("../../CanvasLayer/ActionsContainer/StopThrowButton")
@@ -88,9 +90,11 @@ throw_dice_container = NodePath("../../CanvasLayer/ThrowDiceMargin/ThrowDiceCont
 keep_dice_container = NodePath("../../CanvasLayer/KeepDiceContianer/KeepDiceContainer")
 total_label = NodePath("../../CanvasLayer/KeepDiceContianer/TotalLabel")
 prompt_label = NodePath("../../CanvasLayer/PromptLabel")
+player_name_label = NodePath("../../CanvasLayer/PlayerNameLabel")
 
-[node name="WaitRethrowState" type="Node" parent="TurnStateMachine" node_paths=PackedStringArray("throw_dice_button", "stop_throw_button", "throw_dice_container")]
+[node name="WaitRethrowState" type="Node" parent="TurnStateMachine" node_paths=PackedStringArray("prompt_label", "throw_dice_button", "stop_throw_button", "throw_dice_container")]
 script = ExtResource("3_3xqk5")
+prompt_label = NodePath("../../CanvasLayer/PromptLabel")
 throw_dice_button = NodePath("../../CanvasLayer/ActionsContainer/ThrowDiceButton")
 stop_throw_button = NodePath("../../CanvasLayer/ActionsContainer/StopThrowButton")
 throw_dice_container = NodePath("../../CanvasLayer/ThrowDiceMargin/ThrowDiceContainer")
@@ -103,13 +107,11 @@ throw_dice_container = NodePath("../../CanvasLayer/ThrowDiceMargin/ThrowDiceCont
 dice_animation = NodePath("../../CanvasLayer/DiceThrowAnimation")
 prompt_label = NodePath("../../CanvasLayer/PromptLabel")
 
-[node name="KeepDiceState" type="Node" parent="TurnStateMachine" node_paths=PackedStringArray("stop_throw_button", "throw_dice_container", "keep_dice_container", "total_label", "prompt_label")]
+[node name="KeepDiceState" type="Node" parent="TurnStateMachine" node_paths=PackedStringArray("stop_throw_button", "throw_dice_container", "keep_dice_container")]
 script = ExtResource("5_5yqc1")
 stop_throw_button = NodePath("../../CanvasLayer/ActionsContainer/StopThrowButton")
 throw_dice_container = NodePath("../../CanvasLayer/ThrowDiceMargin/ThrowDiceContainer")
 keep_dice_container = NodePath("../../CanvasLayer/KeepDiceContianer/KeepDiceContainer")
-total_label = NodePath("../../CanvasLayer/KeepDiceContianer/TotalLabel")
-prompt_label = NodePath("../../CanvasLayer/PromptLabel")
 
 [node name="StopThrowState" type="Node" parent="TurnStateMachine" node_paths=PackedStringArray("prompt_label", "throw_dice_button", "stop_throw_button", "deck_controller")]
 script = ExtResource("6_l6rxv")
@@ -125,15 +127,29 @@ deck_controller = NodePath("../../DeckController")
 
 [node name="CanvasLayer" type="CanvasLayer" parent="."]
 
+[node name="PlayerNameLabel" type="Label" parent="CanvasLayer"]
+custom_minimum_size = Vector2(0, 30)
+anchors_preset = 3
+anchor_left = 1.0
+anchor_top = 1.0
+anchor_right = 1.0
+anchor_bottom = 1.0
+offset_left = -159.0
+offset_top = -30.0
+grow_horizontal = 0
+grow_vertical = 0
+text = "Player name"
+horizontal_alignment = 1
+vertical_alignment = 1
+
 [node name="PromptLabel" type="Label" parent="CanvasLayer"]
 custom_minimum_size = Vector2(0, 30)
 anchors_preset = 5
 anchor_left = 0.5
 anchor_right = 0.5
-offset_left = -320.0
-offset_top = -2.0
-offset_right = 320.0
-offset_bottom = 21.0
+offset_left = -400.0
+offset_right = 400.0
+offset_bottom = 30.0
 grow_horizontal = 2
 theme_override_styles/normal = SubResource("StyleBoxFlat_oy2md")
 text = "Prompt"
@@ -219,6 +235,7 @@ texture = ExtResource("7_ekxhj")
 expand_mode = 3
 
 [node name="DiceThrowAnimation" type="AnimatedSprite2D" parent="CanvasLayer"]
+visible = false
 texture_filter = 1
 position = Vector2(592, 378)
 scale = Vector2(5, 5)
@@ -262,3 +279,16 @@ offset_right = 300.0
 offset_bottom = -50.0
 grow_horizontal = 2
 grow_vertical = 2
+
+[node name="BoughtTilesContainer" type="HFlowContainer" parent="CanvasLayer"]
+anchors_preset = 7
+anchor_left = 0.5
+anchor_top = 1.0
+anchor_right = 0.5
+anchor_bottom = 1.0
+offset_left = -250.0
+offset_top = -48.0
+offset_right = 250.0
+offset_bottom = -8.0
+grow_horizontal = 2
+grow_vertical = 0

@@ -1,10 +1,12 @@
 class_name WaitRethrowState extends State
 
+@export var prompt_label: Label
 @export var throw_dice_button: Button
 @export var stop_throw_button: Button
 @export var throw_dice_container: Container
 
 func enter(data := {}) -> void:
+	prompt_label.text = "Throw the dice or stop to buy a tile"
 	_clear_container(throw_dice_container)
 	
 	throw_dice_button.disabled = false

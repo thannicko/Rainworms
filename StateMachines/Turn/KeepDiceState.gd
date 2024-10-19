@@ -3,8 +3,6 @@ class_name KeepDiceState extends State
 @export var stop_throw_button: Button
 @export var throw_dice_container: Container
 @export var keep_dice_container: Container
-@export var total_label: Label
-@export var prompt_label: Label
 
 var _keep_dice: int = 0
 var _dice_textures_to_value: Dictionary = {}
@@ -20,10 +18,8 @@ func enter(data := {}) -> void:
 	state_machine._nr_dices_left = state_machine._nr_dices_left - state_machine._kept_dices[_keep_dice]
 	state_machine.set_points_earned(_get_points_earned(state_machine._kept_dices))
 	if state_machine._nr_dices_left <= 0:
-		prompt_label.text = "Out of dice"
 		self._state_machine._change_to_state("StopThrowState")
 	else:
-		prompt_label.text = "Throw the dice!"
 		self._state_machine._change_to_state("WaitRethrowState")
 
 func _move_textures_to_keep_container() -> void:

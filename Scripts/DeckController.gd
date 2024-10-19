@@ -1,6 +1,7 @@
 class_name DeckController extends Node
 
 @export var tiles_container: Container
+@export var bought_tiles_container: Container
 @export var turn_controller: TurnStateMachine
 
 signal tile_bought(tile: WormTile)
@@ -17,8 +18,8 @@ func has_nothing_to_buy() -> bool:
 	var available_tiles: Array = tiles_container.get_children().filter(func(tile): return not tile.disabled)
 	return available_tiles.is_empty()
 
-func enable_buying() -> void:
-	_buying_enabled = true
+func set_enable_buying(enabled: bool) -> void:
+	_buying_enabled = enabled
 
 func _refresh(new_points: int) -> void:
 	for button in tiles_container.get_children():
@@ -27,8 +28,12 @@ func _refresh(new_points: int) -> void:
 func _is_tile_too_expensive(tile: WormTile, points: int) -> bool:
 	return tile.cost > points
 
-func _buy_tile(tile: WormTile) -> void:
+func _buy_tile(tile: WormTile, button: Button) -> void:
 	if (_buying_enabled):
+		_deck.tiles.erase(tile)
+		button.disabled = true
+		bought_tiles_container.add_child(button.duplicate())
+		button.queue_free()
 		tile_bought.emit(tile)
 		print("DeckController :: Bought tile: ", tile.display_details())
 
@@ -38,7 +43,7 @@ func _draw_deck() -> void:
 		button.text = str(tile.buy_details())
 		button.custom_minimum_size = Vector2(75, 50)
 		button.disabled = true
-		button.button_down.connect(_buy_tile.bind(tile))
+		button.button_down.connect(_buy_tile.bind(tile, button))
 		tiles_container.add_child(button)
 		_button_to_tile[button] = tile
 		

@@ -25,6 +25,7 @@ const _dice_side_to_points: Dictionary = {
 
 enum InvalidThrowType { NO_DICES, NO_WORM, NO_TILES }
 
+@export var total_label: Label
 var _is_invalid_throw: bool = false
 var _invalid_throw_type: InvalidThrowType
 var _nr_dices_left: int = MaxThrows
@@ -34,6 +35,7 @@ var _player: Player
 
 func set_points_earned(points: int) -> void:
 	_player.points_earned_in_turn = points
+	_update_total_label(_player.points_earned_in_turn)
 	points_earned.emit(_player.points_earned_in_turn)
 
 func get_points_earned() -> int:
@@ -42,6 +44,12 @@ func get_points_earned() -> int:
 func buy_tile(tile: WormTile) -> void:
 	set_points_earned(0)
 	_player.tiles_bought.append(tile)
+	
+func reset() -> void:
+	_is_invalid_throw = false
+	_dices_frequency.clear()
+	_kept_dices.clear()
+	_nr_dices_left = MaxThrows
 
 func invalidate_throw(reason: InvalidThrowType) -> void:
 	_is_invalid_throw = true
@@ -61,3 +69,7 @@ func invalid_throw_reason() -> String:
 	elif (_invalid_throw_type == InvalidThrowType.NO_TILES):
 		return "Cannot buy any tiles"
 	return ""
+
+func _update_total_label(new_points: int) -> void:
+	total_label.text = "Total: " + str(new_points)
+	total_label.show()
