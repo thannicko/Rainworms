@@ -153,11 +153,11 @@ anchor_bottom = 1.0
 offset_top = -52.0
 offset_right = 250.0
 grow_vertical = 0
+size_flags_horizontal = 2
 
 [node name="KeepDiceContainer" type="HBoxContainer" parent="CanvasLayer/KeepDiceContianer"]
-custom_minimum_size = Vector2(250, 25)
+custom_minimum_size = Vector2(250, 60)
 layout_mode = 2
-alignment = 1
 
 [node name="TextureRect" type="TextureRect" parent="CanvasLayer/KeepDiceContianer/KeepDiceContainer"]
 layout_mode = 2
@@ -235,15 +235,17 @@ offset_bottom = -50.0
 grow_horizontal = 2
 grow_vertical = 2
 
-[node name="BoughtTilesContainer" type="HFlowContainer" parent="CanvasLayer"]
+[node name="BoughtTilesContainer" type="VFlowContainer" parent="CanvasLayer"]
+custom_minimum_size = Vector2(0, 5)
 anchors_preset = 7
 anchor_left = 0.5
 anchor_top = 1.0
 anchor_right = 0.5
 anchor_bottom = 1.0
-offset_left = -250.0
-offset_top = -48.0
-offset_right = 250.0
-offset_bottom = -8.0
+offset_left = 391.0
+offset_top = -331.0
+offset_right = 396.0
+offset_bottom = -291.0
 grow_horizontal = 2
 grow_vertical = 0
+size_flags_horizontal = 3
