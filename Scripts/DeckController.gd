@@ -8,6 +8,7 @@ signal tile_bought(tile: WormTile)
 
 var _deck: TileDeck = load("res://Deck.tres")
 var _button_to_tile: Dictionary = {}
+var _bought_tile_to_button: Dictionary = {}
 var _buying_enabled: bool = false
 
 func _ready():
@@ -21,6 +22,30 @@ func has_nothing_to_buy() -> bool:
 func set_enable_buying(enabled: bool) -> void:
 	_buying_enabled = enabled
 
+func disable_next_highest_tile() -> void:
+	var next_highest_tile: Button = tiles_container.get_children().back()
+	tiles_container.get_children().erase(next_highest_tile)
+	next_highest_tile.queue_free()
+
+func return_last_bought_tile_to_deck(player: Player) -> void:
+	var last_tile: WormTile = player.tiles_bought.pop_back()
+	if (last_tile != null):
+		_deck.tiles.append(last_tile)
+		_sort_deck()
+		
+		var last_bought: Button = _bought_tile_to_button[last_tile]
+		var button: Button = _spawn_button(last_tile)
+		tiles_container.add_child(button)
+		tiles_container.move_child(button, _deck.tiles.find(last_tile))
+		_button_to_tile[button] = last_tile
+		last_bought.queue_free()
+
+func _sort_deck() -> void:
+	_deck.tiles.sort_custom(
+		func(a: WormTile, b: WormTile):
+			return a.cost < b.cost
+	)
+
 func _refresh(new_points: int, has_no_worms: bool) -> void:
 	for button in tiles_container.get_children():
 		button.disabled = _is_tile_too_expensive(_button_to_tile[button], new_points)
@@ -33,18 +58,23 @@ func _buy_tile(tile: WormTile, button: Button) -> void:
 	if (_buying_enabled):
 		_deck.tiles.erase(tile)
 		button.disabled = true
-		bought_tiles_container.add_child(button.duplicate())
+		var bought_button: Button = button.duplicate()
+		bought_tiles_container.add_child(bought_button)
+		_bought_tile_to_button[tile] = bought_button
 		button.queue_free()
 		tile_bought.emit(tile)
 		print("DeckController :: Bought tile: ", tile.display_details())
 
 func _draw_deck() -> void:
 	for tile in _deck.tiles:
-		var button := Button.new()
-		button.text = str(tile.buy_details())
-		button.custom_minimum_size = Vector2(75, 50)
-		button.disabled = true
-		button.button_down.connect(_buy_tile.bind(tile, button))
+		var button: Button = _spawn_button(tile)
 		tiles_container.add_child(button)
 		_button_to_tile[button] = tile
-		
+
+func _spawn_button(tile: WormTile) -> Button:
+	var button := Button.new()
+	button.text = str(tile.buy_details())
+	button.custom_minimum_size = Vector2(75, 50)
+	button.disabled = true
+	button.button_down.connect(_buy_tile.bind(tile, button))
+	return button

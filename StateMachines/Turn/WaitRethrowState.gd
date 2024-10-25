@@ -13,7 +13,6 @@ func enter(data := {}) -> void:
 	throw_dice_button.button_down.connect(_on_throw_dice_button_down)
 	throw_dice_button.show()
 	
-	#TODO: Move this somehow into buyingtilestate and allow us to go there?
 	deck_controller.set_enable_buying(true)
 	deck_controller.tile_bought.connect(_on_tile_bought)
 
