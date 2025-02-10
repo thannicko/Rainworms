@@ -88,10 +88,9 @@ public partial class DeckController : Node
 
     private void BuyTile(WormTile tile, TextureButton button)
     {
-        if (!IsBuyingEnabled)
+        if (!IsBuyingEnabled || BoughtTilesContainer.GetChildren().Contains(button))
             return;
         deck.Tiles.Remove(tile);
-        button.Disabled = true;
         TilesContainer.RemoveChild(button);
         BoughtTilesContainer.AddChild(button);
         EmitSignal(SignalName.TileBought, tile);
