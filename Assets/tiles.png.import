@@ -2,16 +2,16 @@
 
 importer="texture"
 type="CompressedTexture2D"
-uid="uid://ch8s5dw3gr3de"
-path="res://.godot/imported/Worm Sprite Sheet.png-42742ea3677b95ec03523c9c8a1e3c91.ctex"
+uid="uid://cqr3c0j04bkim"
+path="res://.godot/imported/tiles.png-bfbd3a49507d49882cba49626454bc89.ctex"
 metadata={
 "vram_texture": false
 }
 
 [deps]
 
-source_file="res://Assets/Worm Sprite Sheet.png"
-dest_files=["res://.godot/imported/Worm Sprite Sheet.png-42742ea3677b95ec03523c9c8a1e3c91.ctex"]
+source_file="res://Assets/tiles.png"
+dest_files=["res://.godot/imported/tiles.png-bfbd3a49507d49882cba49626454bc89.ctex"]
 
 [params]
 

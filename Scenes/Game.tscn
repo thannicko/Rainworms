@@ -1,12 +1,12 @@
 [gd_scene load_steps=18 format=3 uid="uid://c4r3anhiqbtsa"]
 
-[ext_resource type="Script" path="res://StateMachines/Turn/TurnStateMachine.gd" id="1_o8pd1"]
-[ext_resource type="Script" path="res://Scripts/DeckController.gd" id="1_p0fjl"]
-[ext_resource type="Script" path="res://StateMachines/Turn/InitialThrowState.gd" id="2_avjjy"]
-[ext_resource type="Script" path="res://StateMachines/Turn/WaitRethrowState.gd" id="3_3xqk5"]
-[ext_resource type="Script" path="res://StateMachines/Turn/ThrowingState.gd" id="4_e26gu"]
-[ext_resource type="Script" path="res://StateMachines/Turn/KeepDiceState.gd" id="5_5yqc1"]
-[ext_resource type="Script" path="res://StateMachines/Turn/StopThrowState.gd" id="6_l6rxv"]
+[ext_resource type="Script" path="res://StateMachines/Turn/TurnStateMachine.cs" id="1_am2hy"]
+[ext_resource type="Script" path="res://Scripts/DeckController.cs" id="1_efgpp"]
+[ext_resource type="Script" path="res://StateMachines/Turn/InitialThrowState.cs" id="2_rp1xf"]
+[ext_resource type="Script" path="res://StateMachines/Turn/ThrowingState.cs" id="3_5ii2w"]
+[ext_resource type="Script" path="res://StateMachines/Turn/KeepDiceState.cs" id="4_cdyae"]
+[ext_resource type="Script" path="res://StateMachines/Turn/StopThrowState.cs" id="5_cqkhe"]
+[ext_resource type="Script" path="res://StateMachines/Turn/WaitRethrowState.cs" id="6_pjf3t"]
 [ext_resource type="Texture2D" uid="uid://b4j6dlwlo8ti0" path="res://Assets/six sided die.png" id="8_1koic"]
 [ext_resource type="Texture2D" uid="uid://cjlia5ygewjeq" path="res://Assets/dice-worm.png" id="9_3hr2b"]
 
@@ -71,49 +71,49 @@ animations = [{
 layout_mode = 3
 anchors_preset = 0
 
-[node name="DeckController" type="Node" parent="." node_paths=PackedStringArray("tiles_container", "bought_tiles_container", "turn_controller")]
-script = ExtResource("1_p0fjl")
-tiles_container = NodePath("../CanvasLayer/TileContainer")
-bought_tiles_container = NodePath("../CanvasLayer/BoughtTilesContainer")
-turn_controller = NodePath("../TurnStateMachine")
+[node name="DeckController" type="Node" parent="." node_paths=PackedStringArray("TilesContainer", "BoughtTilesContainer", "TurnController")]
+script = ExtResource("1_efgpp")
+TilesContainer = NodePath("../CanvasLayer/TileContainer")
+BoughtTilesContainer = NodePath("../CanvasLayer/BoughtTilesContainer")
+TurnController = NodePath("../TurnStateMachine")
 
-[node name="TurnStateMachine" type="Node" parent="." node_paths=PackedStringArray("total_label")]
-script = ExtResource("1_o8pd1")
-total_label = NodePath("../CanvasLayer/KeepDiceContianer/TotalLabel")
+[node name="TurnStateMachine" type="Node" parent="." node_paths=PackedStringArray("TotalLabel")]
+script = ExtResource("1_am2hy")
+TotalLabel = NodePath("../CanvasLayer/KeepDiceContianer/TotalLabel")
 
-[node name="InitialThrowState" type="Node" parent="TurnStateMachine" node_paths=PackedStringArray("throw_dice_button", "throw_dice_container", "keep_dice_container", "total_label", "prompt_label", "player_name_label")]
-script = ExtResource("2_avjjy")
-throw_dice_button = NodePath("../../CanvasLayer/ActionsContainer/ThrowDiceButton")
-throw_dice_container = NodePath("../../CanvasLayer/ThrowDiceMargin/ThrowDiceContainer")
-keep_dice_container = NodePath("../../CanvasLayer/KeepDiceContianer/KeepDiceContainer")
-total_label = NodePath("../../CanvasLayer/KeepDiceContianer/TotalLabel")
-prompt_label = NodePath("../../CanvasLayer/PromptLabel")
-player_name_label = NodePath("../../CanvasLayer/PlayerNameLabel")
+[node name="InitialThrowState" type="Node" parent="TurnStateMachine" node_paths=PackedStringArray("ThrowDiceButton", "ThrowDiceContainer", "KeepDiceContainer", "TotalLabel", "PromptLabel", "PlayerNameLabel")]
+script = ExtResource("2_rp1xf")
+ThrowDiceButton = NodePath("../../CanvasLayer/ActionsContainer/ThrowDiceButton")
+ThrowDiceContainer = NodePath("../../CanvasLayer/ThrowDiceMargin/ThrowDiceContainer")
+KeepDiceContainer = NodePath("../../CanvasLayer/KeepDiceContianer/KeepDiceContainer")
+TotalLabel = NodePath("../../CanvasLayer/KeepDiceContianer/TotalLabel")
+PromptLabel = NodePath("../../CanvasLayer/PromptLabel")
+PlayerNameLabel = NodePath("../../CanvasLayer/PlayerNameLabel")
 
-[node name="WaitRethrowState" type="Node" parent="TurnStateMachine" node_paths=PackedStringArray("prompt_label", "throw_dice_button", "throw_dice_container", "deck_controller")]
-script = ExtResource("3_3xqk5")
-prompt_label = NodePath("../../CanvasLayer/PromptLabel")
-throw_dice_button = NodePath("../../CanvasLayer/ActionsContainer/ThrowDiceButton")
-throw_dice_container = NodePath("../../CanvasLayer/ThrowDiceMargin/ThrowDiceContainer")
-deck_controller = NodePath("../../DeckController")
+[node name="ThrowingState" type="Node" parent="TurnStateMachine" node_paths=PackedStringArray("ThrowDiceButton", "ThrowDiceContainer", "DiceAnimation", "PromptLabel")]
+script = ExtResource("3_5ii2w")
+ThrowDiceButton = NodePath("../../CanvasLayer/ActionsContainer/ThrowDiceButton")
+ThrowDiceContainer = NodePath("../../CanvasLayer/ThrowDiceMargin/ThrowDiceContainer")
+DiceAnimation = NodePath("../../CanvasLayer/DiceThrowAnimation")
+PromptLabel = NodePath("../../CanvasLayer/PromptLabel")
 
-[node name="ThrowingState" type="Node" parent="TurnStateMachine" node_paths=PackedStringArray("throw_dice_button", "throw_dice_container", "dice_animation", "prompt_label")]
-script = ExtResource("4_e26gu")
-throw_dice_button = NodePath("../../CanvasLayer/ActionsContainer/ThrowDiceButton")
-throw_dice_container = NodePath("../../CanvasLayer/ThrowDiceMargin/ThrowDiceContainer")
-dice_animation = NodePath("../../CanvasLayer/DiceThrowAnimation")
-prompt_label = NodePath("../../CanvasLayer/PromptLabel")
+[node name="KeepDiceState" type="Node" parent="TurnStateMachine" node_paths=PackedStringArray("ThrowDiceContainer", "KeepDiceContainer")]
+script = ExtResource("4_cdyae")
+ThrowDiceContainer = NodePath("../../CanvasLayer/ThrowDiceMargin/ThrowDiceContainer")
+KeepDiceContainer = NodePath("../../CanvasLayer/KeepDiceContianer/KeepDiceContainer")
 
-[node name="KeepDiceState" type="Node" parent="TurnStateMachine" node_paths=PackedStringArray("throw_dice_container", "keep_dice_container")]
-script = ExtResource("5_5yqc1")
-throw_dice_container = NodePath("../../CanvasLayer/ThrowDiceMargin/ThrowDiceContainer")
-keep_dice_container = NodePath("../../CanvasLayer/KeepDiceContianer/KeepDiceContainer")
+[node name="StopThrowState" type="Node" parent="TurnStateMachine" node_paths=PackedStringArray("PromptLabel", "ThrowDiceButton", "DeckController")]
+script = ExtResource("5_cqkhe")
+PromptLabel = NodePath("../../CanvasLayer/PromptLabel")
+ThrowDiceButton = NodePath("../../CanvasLayer/ActionsContainer/ThrowDiceButton")
+DeckController = NodePath("../../DeckController")
 
-[node name="StopThrowState" type="Node" parent="TurnStateMachine" node_paths=PackedStringArray("prompt_label", "throw_dice_button", "deck_controller")]
-script = ExtResource("6_l6rxv")
-prompt_label = NodePath("../../CanvasLayer/PromptLabel")
-throw_dice_button = NodePath("../../CanvasLayer/ActionsContainer/ThrowDiceButton")
-deck_controller = NodePath("../../DeckController")
+[node name="WaitRethrowState" type="Node" parent="TurnStateMachine" node_paths=PackedStringArray("PromptLabel", "ThrowDiceButton", "ThrowDiceContainer", "DeckController")]
+script = ExtResource("6_pjf3t")
+PromptLabel = NodePath("../../CanvasLayer/PromptLabel")
+ThrowDiceButton = NodePath("../../CanvasLayer/ActionsContainer/ThrowDiceButton")
+ThrowDiceContainer = NodePath("../../CanvasLayer/ThrowDiceMargin/ThrowDiceContainer")
+DeckController = NodePath("../../DeckController")
 
 [node name="CanvasLayer" type="CanvasLayer" parent="."]
 

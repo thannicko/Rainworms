@@ -1,88 +1,88 @@
-[gd_resource type="Resource" script_class="TileDeck" load_steps=19 format=3 uid="uid://bs3ukpatlc1ly"]
+[gd_resource type="Resource" script_class="TileDeck" load_steps=19 format=3 uid="uid://bxinvr5ylw50b"]
 
-[ext_resource type="Script" path="res://Scripts/TileDeck.gd" id="1_ax2ob"]
-[ext_resource type="Script" path="res://Scripts/WormTile.gd" id="2_466vf"]
+[ext_resource type="Script" path="res://Scripts/WormTile.cs" id="1_xifsl"]
+[ext_resource type="Script" path="res://Scripts/TileDeck.cs" id="2_tbt43"]
 
-[sub_resource type="Resource" id="Resource_0dlmq"]
-script = ExtResource("2_466vf")
-cost = 21
-worm = 1
+[sub_resource type="Resource" id="Resource_t53vh"]
+script = ExtResource("1_xifsl")
+Cost = 21
+Worm = 1
 
-[sub_resource type="Resource" id="Resource_m25vj"]
-script = ExtResource("2_466vf")
-cost = 22
-worm = 1
+[sub_resource type="Resource" id="Resource_s0tpy"]
+script = ExtResource("1_xifsl")
+Cost = 22
+Worm = 1
 
-[sub_resource type="Resource" id="Resource_soeys"]
-script = ExtResource("2_466vf")
-cost = 23
-worm = 1
+[sub_resource type="Resource" id="Resource_a3txu"]
+script = ExtResource("1_xifsl")
+Cost = 23
+Worm = 1
 
-[sub_resource type="Resource" id="Resource_6jrwq"]
-script = ExtResource("2_466vf")
-cost = 24
-worm = 1
+[sub_resource type="Resource" id="Resource_2lfye"]
+script = ExtResource("1_xifsl")
+Cost = 24
+Worm = 1
 
-[sub_resource type="Resource" id="Resource_igpyq"]
-script = ExtResource("2_466vf")
-cost = 25
-worm = 2
+[sub_resource type="Resource" id="Resource_ajyun"]
+script = ExtResource("1_xifsl")
+Cost = 25
+Worm = 2
 
-[sub_resource type="Resource" id="Resource_o7st6"]
-script = ExtResource("2_466vf")
-cost = 26
-worm = 2
+[sub_resource type="Resource" id="Resource_vqn6l"]
+script = ExtResource("1_xifsl")
+Cost = 26
+Worm = 2
 
-[sub_resource type="Resource" id="Resource_43ifj"]
-script = ExtResource("2_466vf")
-cost = 27
-worm = 2
+[sub_resource type="Resource" id="Resource_c3rku"]
+script = ExtResource("1_xifsl")
+Cost = 27
+Worm = 2
 
-[sub_resource type="Resource" id="Resource_gmpoh"]
-script = ExtResource("2_466vf")
-cost = 28
-worm = 2
+[sub_resource type="Resource" id="Resource_wju1b"]
+script = ExtResource("1_xifsl")
+Cost = 28
+Worm = 2
 
-[sub_resource type="Resource" id="Resource_i4gcw"]
-script = ExtResource("2_466vf")
-cost = 29
-worm = 3
+[sub_resource type="Resource" id="Resource_ujvey"]
+script = ExtResource("1_xifsl")
+Cost = 29
+Worm = 3
 
-[sub_resource type="Resource" id="Resource_f5sat"]
-script = ExtResource("2_466vf")
-cost = 30
-worm = 3
+[sub_resource type="Resource" id="Resource_m7370"]
+script = ExtResource("1_xifsl")
+Cost = 30
+Worm = 3
 
-[sub_resource type="Resource" id="Resource_g1y7h"]
-script = ExtResource("2_466vf")
-cost = 31
-worm = 3
+[sub_resource type="Resource" id="Resource_g7woe"]
+script = ExtResource("1_xifsl")
+Cost = 31
+Worm = 3
 
-[sub_resource type="Resource" id="Resource_xgr8s"]
-script = ExtResource("2_466vf")
-cost = 32
-worm = 3
+[sub_resource type="Resource" id="Resource_0qi3b"]
+script = ExtResource("1_xifsl")
+Cost = 32
+Worm = 3
 
-[sub_resource type="Resource" id="Resource_vi3ao"]
-script = ExtResource("2_466vf")
-cost = 33
-worm = 4
+[sub_resource type="Resource" id="Resource_y3sp5"]
+script = ExtResource("1_xifsl")
+Cost = 33
+Worm = 4
 
-[sub_resource type="Resource" id="Resource_cojh8"]
-script = ExtResource("2_466vf")
-cost = 34
-worm = 4
+[sub_resource type="Resource" id="Resource_ssyq5"]
+script = ExtResource("1_xifsl")
+Cost = 34
+Worm = 4
 
-[sub_resource type="Resource" id="Resource_r7oih"]
-script = ExtResource("2_466vf")
-cost = 35
-worm = 4
+[sub_resource type="Resource" id="Resource_b1xml"]
+script = ExtResource("1_xifsl")
+Cost = 35
+Worm = 4
 
-[sub_resource type="Resource" id="Resource_pmctv"]
-script = ExtResource("2_466vf")
-cost = 36
-worm = 4
+[sub_resource type="Resource" id="Resource_xyxqd"]
+script = ExtResource("1_xifsl")
+Cost = 36
+Worm = 4
 
 [resource]
-script = ExtResource("1_ax2ob")
-tiles = Array[ExtResource("2_466vf")]([SubResource("Resource_0dlmq"), SubResource("Resource_m25vj"), SubResource("Resource_soeys"), SubResource("Resource_6jrwq"), SubResource("Resource_igpyq"), SubResource("Resource_o7st6"), SubResource("Resource_43ifj"), SubResource("Resource_gmpoh"), SubResource("Resource_i4gcw"), SubResource("Resource_f5sat"), SubResource("Resource_g1y7h"), SubResource("Resource_xgr8s"), SubResource("Resource_vi3ao"), SubResource("Resource_cojh8"), SubResource("Resource_r7oih"), SubResource("Resource_pmctv")])
+script = ExtResource("2_tbt43")
+Tiles = Array[Object]([SubResource("Resource_t53vh"), SubResource("Resource_s0tpy"), SubResource("Resource_a3txu"), SubResource("Resource_2lfye"), SubResource("Resource_ajyun"), SubResource("Resource_vqn6l"), SubResource("Resource_c3rku"), SubResource("Resource_wju1b"), SubResource("Resource_ujvey"), SubResource("Resource_m7370"), SubResource("Resource_g7woe"), SubResource("Resource_0qi3b"), SubResource("Resource_y3sp5"), SubResource("Resource_ssyq5"), SubResource("Resource_b1xml"), SubResource("Resource_xyxqd")])
