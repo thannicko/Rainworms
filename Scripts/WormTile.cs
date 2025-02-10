@@ -9,6 +9,12 @@ public partial class WormTile : Resource
 	[Export]
 	public int Worm { get; set; }
 
+	[Export]
+	public Texture2D TextureNormal { get; set; }
+
+	[Export]
+	public Texture2D TextureDisabled { get; set; }
+
 	public WormTile() : this(0, 0) {}
 
 	public WormTile(int cost, int worm)

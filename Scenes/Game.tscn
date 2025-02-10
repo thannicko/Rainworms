@@ -1,4 +1,4 @@
-[gd_scene load_steps=18 format=3 uid="uid://c4r3anhiqbtsa"]
+[gd_scene load_steps=19 format=3 uid="uid://c4r3anhiqbtsa"]
 
 [ext_resource type="Script" path="res://StateMachines/Turn/TurnStateMachine.cs" id="1_am2hy"]
 [ext_resource type="Script" path="res://Scripts/DeckController.cs" id="1_efgpp"]
@@ -9,6 +9,7 @@
 [ext_resource type="Script" path="res://StateMachines/Turn/WaitRethrowState.cs" id="6_pjf3t"]
 [ext_resource type="Texture2D" uid="uid://b4j6dlwlo8ti0" path="res://Assets/six sided die.png" id="8_1koic"]
 [ext_resource type="Texture2D" uid="uid://cjlia5ygewjeq" path="res://Assets/dice-worm.png" id="9_3hr2b"]
+[ext_resource type="Texture2D" path="res://Assets/00_tiles.png" id="10_2o7xb"]
 
 [sub_resource type="StyleBoxFlat" id="StyleBoxFlat_oy2md"]
 bg_color = Color(0.588235, 0.0431373, 0.192157, 0.431373)
@@ -249,3 +250,14 @@ offset_bottom = -291.0
 grow_horizontal = 2
 grow_vertical = 0
 size_flags_horizontal = 3
+
+[node name="TextureButton" type="TextureButton" parent="."]
+visible = false
+layout_mode = 0
+offset_left = 303.0
+offset_top = 137.0
+offset_right = 343.0
+offset_bottom = 201.0
+scale = Vector2(5, 5)
+texture_normal = ExtResource("10_2o7xb")
+stretch_mode = 5

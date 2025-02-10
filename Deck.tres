@@ -1,87 +1,151 @@
-[gd_resource type="Resource" script_class="TileDeck" load_steps=19 format=3 uid="uid://bxinvr5ylw50b"]
+[gd_resource type="Resource" script_class="TileDeck" load_steps=51 format=3 uid="uid://bxinvr5ylw50b"]
 
+[ext_resource type="Texture2D" uid="uid://we6o1hah5cw6" path="res://Assets/tiles_grayscale/00_tiles_grayscale.png" id="1_6ms6o"]
+[ext_resource type="Texture2D" uid="uid://bdsbsxj1ni408" path="res://Assets/tiles/00_tiles.png" id="1_35uhd"]
 [ext_resource type="Script" path="res://Scripts/WormTile.cs" id="1_xifsl"]
 [ext_resource type="Script" path="res://Scripts/TileDeck.cs" id="2_tbt43"]
+[ext_resource type="Texture2D" uid="uid://dh4ha8fe0k7k5" path="res://Assets/tiles/01_tiles.png" id="3_0mfa3"]
+[ext_resource type="Texture2D" uid="uid://divnv3r6r3qmf" path="res://Assets/tiles/03_tiles.png" id="4_3ymav"]
+[ext_resource type="Texture2D" uid="uid://b8kesdefbu5qf" path="res://Assets/tiles_grayscale/01_tiles_grayscale.png" id="4_pgoej"]
+[ext_resource type="Texture2D" uid="uid://cwliwd6ldeiqk" path="res://Assets/tiles/04_tiles.png" id="5_mqayu"]
+[ext_resource type="Texture2D" uid="uid://cmdxuv8lyqe4k" path="res://Assets/tiles/05_tiles.png" id="6_cpqvb"]
+[ext_resource type="Texture2D" uid="uid://cjxqvp5sbjsgp" path="res://Assets/tiles_grayscale/02_tiles_grayscale.png" id="6_sld75"]
+[ext_resource type="Texture2D" uid="uid://bx5xewivahu0x" path="res://Assets/tiles/06_tiles.png" id="7_gflia"]
+[ext_resource type="Texture2D" uid="uid://de681lnd0ic3x" path="res://Assets/tiles/02_tiles.png" id="7_thmnj"]
+[ext_resource type="Texture2D" uid="uid://dsti0fcqv48i0" path="res://Assets/tiles_grayscale/03_tiles_grayscale.png" id="8_unwmd"]
+[ext_resource type="Texture2D" uid="uid://cotpoqikd0y2u" path="res://Assets/tiles/07_tiles.png" id="8_xsp7b"]
+[ext_resource type="Texture2D" uid="uid://5f5a8x0gbpdg" path="res://Assets/tiles/08_tiles.png" id="9_f1wxw"]
+[ext_resource type="Texture2D" uid="uid://u7cgcx4ogb7c" path="res://Assets/tiles/09_tiles.png" id="10_6srvd"]
+[ext_resource type="Texture2D" uid="uid://dowlusvc3b2my" path="res://Assets/tiles_grayscale/04_tiles_grayscale.png" id="10_308rb"]
+[ext_resource type="Texture2D" uid="uid://gbdb8f3iog5l" path="res://Assets/tiles/10_tiles.png" id="11_ycs8s"]
+[ext_resource type="Texture2D" uid="uid://b3rm82h0335q8" path="res://Assets/tiles_grayscale/05_tiles_grayscale.png" id="12_ksvu3"]
+[ext_resource type="Texture2D" uid="uid://dmdfnv6841pv4" path="res://Assets/tiles/11_tiles.png" id="12_w64jf"]
+[ext_resource type="Texture2D" uid="uid://cqip5phyjhoxw" path="res://Assets/tiles/12_tiles.png" id="13_be8f2"]
+[ext_resource type="Texture2D" uid="uid://dbfo0cxr4pxg7" path="res://Assets/tiles/13_tiles.png" id="14_fdys1"]
+[ext_resource type="Texture2D" uid="uid://r12er6ol4qis" path="res://Assets/tiles_grayscale/06_tiles_grayscale.png" id="14_g4g2y"]
+[ext_resource type="Texture2D" uid="uid://byn8ml0a546mi" path="res://Assets/tiles/14_tiles.png" id="15_ulma3"]
+[ext_resource type="Texture2D" uid="uid://bj26rgajmi8g3" path="res://Assets/tiles_grayscale/07_tiles_grayscale.png" id="16_088lp"]
+[ext_resource type="Texture2D" uid="uid://c0orod8yxebav" path="res://Assets/tiles/15_tiles.png" id="16_r2trs"]
+[ext_resource type="Texture2D" uid="uid://brdc0jombd6ch" path="res://Assets/tiles_grayscale/08_tiles_grayscale.png" id="18_xbgnq"]
+[ext_resource type="Texture2D" uid="uid://dt1pe1e45we72" path="res://Assets/tiles_grayscale/09_tiles_grayscale.png" id="20_ax12a"]
+[ext_resource type="Texture2D" uid="uid://col2cuoxig7ro" path="res://Assets/tiles_grayscale/10_tiles_grayscale.png" id="21_mptor"]
+[ext_resource type="Texture2D" uid="uid://dx3kcanem66qa" path="res://Assets/tiles_grayscale/11_tiles_grayscale.png" id="23_ef6sb"]
+[ext_resource type="Texture2D" uid="uid://cw2av0x1qxux6" path="res://Assets/tiles_grayscale/12_tiles_grayscale.png" id="25_faxwv"]
+[ext_resource type="Texture2D" uid="uid://yykb3ak1os2m" path="res://Assets/tiles_grayscale/13_tiles_grayscale.png" id="27_1aafh"]
+[ext_resource type="Texture2D" uid="uid://dmhx5xjmh5ati" path="res://Assets/tiles_grayscale/14_tiles_grayscale.png" id="29_4s2w1"]
+[ext_resource type="Texture2D" uid="uid://dvayxjo0g7p4i" path="res://Assets/tiles_grayscale/15_tiles_grayscale.png" id="31_amuu6"]
 
 [sub_resource type="Resource" id="Resource_t53vh"]
 script = ExtResource("1_xifsl")
 Cost = 21
 Worm = 1
+TextureNormal = ExtResource("1_35uhd")
+TextureDisabled = ExtResource("1_6ms6o")
 
 [sub_resource type="Resource" id="Resource_s0tpy"]
 script = ExtResource("1_xifsl")
 Cost = 22
 Worm = 1
+TextureNormal = ExtResource("3_0mfa3")
+TextureDisabled = ExtResource("4_pgoej")
 
 [sub_resource type="Resource" id="Resource_a3txu"]
 script = ExtResource("1_xifsl")
 Cost = 23
 Worm = 1
+TextureNormal = ExtResource("7_thmnj")
+TextureDisabled = ExtResource("6_sld75")
 
 [sub_resource type="Resource" id="Resource_2lfye"]
 script = ExtResource("1_xifsl")
 Cost = 24
 Worm = 1
+TextureNormal = ExtResource("4_3ymav")
+TextureDisabled = ExtResource("8_unwmd")
 
 [sub_resource type="Resource" id="Resource_ajyun"]
 script = ExtResource("1_xifsl")
 Cost = 25
 Worm = 2
+TextureNormal = ExtResource("5_mqayu")
+TextureDisabled = ExtResource("10_308rb")
 
 [sub_resource type="Resource" id="Resource_vqn6l"]
 script = ExtResource("1_xifsl")
 Cost = 26
 Worm = 2
+TextureNormal = ExtResource("6_cpqvb")
+TextureDisabled = ExtResource("12_ksvu3")
 
 [sub_resource type="Resource" id="Resource_c3rku"]
 script = ExtResource("1_xifsl")
 Cost = 27
 Worm = 2
+TextureNormal = ExtResource("7_gflia")
+TextureDisabled = ExtResource("14_g4g2y")
 
 [sub_resource type="Resource" id="Resource_wju1b"]
 script = ExtResource("1_xifsl")
 Cost = 28
 Worm = 2
+TextureNormal = ExtResource("8_xsp7b")
+TextureDisabled = ExtResource("16_088lp")
 
 [sub_resource type="Resource" id="Resource_ujvey"]
 script = ExtResource("1_xifsl")
 Cost = 29
 Worm = 3
+TextureNormal = ExtResource("9_f1wxw")
+TextureDisabled = ExtResource("18_xbgnq")
 
 [sub_resource type="Resource" id="Resource_m7370"]
 script = ExtResource("1_xifsl")
 Cost = 30
 Worm = 3
+TextureNormal = ExtResource("10_6srvd")
+TextureDisabled = ExtResource("20_ax12a")
 
 [sub_resource type="Resource" id="Resource_g7woe"]
 script = ExtResource("1_xifsl")
 Cost = 31
 Worm = 3
+TextureNormal = ExtResource("11_ycs8s")
+TextureDisabled = ExtResource("21_mptor")
 
 [sub_resource type="Resource" id="Resource_0qi3b"]
 script = ExtResource("1_xifsl")
 Cost = 32
 Worm = 3
+TextureNormal = ExtResource("12_w64jf")
+TextureDisabled = ExtResource("23_ef6sb")
 
 [sub_resource type="Resource" id="Resource_y3sp5"]
 script = ExtResource("1_xifsl")
 Cost = 33
 Worm = 4
+TextureNormal = ExtResource("13_be8f2")
+TextureDisabled = ExtResource("25_faxwv")
 
 [sub_resource type="Resource" id="Resource_ssyq5"]
 script = ExtResource("1_xifsl")
 Cost = 34
 Worm = 4
+TextureNormal = ExtResource("14_fdys1")
+TextureDisabled = ExtResource("27_1aafh")
 
 [sub_resource type="Resource" id="Resource_b1xml"]
 script = ExtResource("1_xifsl")
 Cost = 35
 Worm = 4
+TextureNormal = ExtResource("15_ulma3")
+TextureDisabled = ExtResource("29_4s2w1")
 
 [sub_resource type="Resource" id="Resource_xyxqd"]
 script = ExtResource("1_xifsl")
 Cost = 36
 Worm = 4
+TextureNormal = ExtResource("16_r2trs")
+TextureDisabled = ExtResource("31_amuu6")
 
 [resource]
 script = ExtResource("2_tbt43")

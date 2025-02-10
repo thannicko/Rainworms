@@ -87,7 +87,6 @@ public partial class ThrowingState : State
         newDice.ExpandMode = TextureRect.ExpandModeEnum.FitWidthProportional;
         if (IsAllowedToKeepDice(diceValue))
         {
-            //TODO: I think this lambda may give issue as we didn't disconnect it.
             newDice.GuiInput += (InputEvent @event) => OnGuiInputDice(@event, diceValue);
         }
         else

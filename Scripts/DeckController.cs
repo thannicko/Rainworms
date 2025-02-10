@@ -27,7 +27,7 @@ public partial class DeckController : Node
     public bool HasNothingToBuy()
     {
         var availableTiles = TilesContainer.GetChildren().Where(
-            tile => !(tile as Button).Disabled).ToList();
+            tile => !(tile as TextureButton).Disabled).ToList();
         return availableTiles.Count == 0;
     }
 
@@ -47,8 +47,8 @@ public partial class DeckController : Node
         deck.Tiles.Add(lastBoughtTile);
         deck.Tiles.OrderBy(tile => tile.Cost);
 
-        Button lastBoughtButton = boughtTileToButton[lastBoughtTile];
-        Button toReturnToDeck = SpawnButton(lastBoughtTile);
+        TextureButton lastBoughtButton = boughtTileToButton[lastBoughtTile];
+        TextureButton toReturnToDeck = SpawnButton(lastBoughtTile);
         TilesContainer.AddChild(toReturnToDeck);
         TilesContainer.MoveChild(toReturnToDeck, deck.Tiles.IndexOf(lastBoughtTile));
         buttonToTile[toReturnToDeck] = lastBoughtTile;
@@ -59,7 +59,7 @@ public partial class DeckController : Node
     {
         foreach (WormTile tile in deck.Tiles)
         {
-            Button button = SpawnButton(tile);
+            TextureButton button = SpawnButton(tile);
             TilesContainer.AddChild(button);
             buttonToTile[button] = tile;
         }
@@ -67,24 +67,26 @@ public partial class DeckController : Node
 
     private void Refresh(int newPoints, bool hasNoWorms)
     {
-        foreach (Button button in TilesContainer.GetChildren())
+        foreach (TextureButton button in TilesContainer.GetChildren())
         {
             button.Disabled = IsTileTooExpensive(buttonToTile[button], newPoints);
             button.Disabled |= hasNoWorms;
         }
     }
 
-    private Button SpawnButton(WormTile tile)
+    private TextureButton SpawnButton(WormTile tile)
     {
-        var button = new Button();
-        button.Text = tile.BuyInfo();
-        button.CustomMinimumSize = new Vector2(75, 50);
+        GD.Print("DeckController :: SpawnButton ", tile);
+        var button = new TextureButton();
+        button.StretchMode = TextureButton.StretchModeEnum.KeepAspectCentered;
+        button.TextureNormal = tile.TextureNormal;
+        button.TextureDisabled = tile.TextureDisabled;
         button.Disabled = true;
         button.ButtonDown += () => BuyTile(tile, button);
         return button;
     }
 
-    private void BuyTile(WormTile tile, Button button)
+    private void BuyTile(WormTile tile, TextureButton button)
     {
         if (!IsBuyingEnabled)
             return;
@@ -99,6 +101,6 @@ public partial class DeckController : Node
     private bool IsTileTooExpensive(WormTile tile, int points) => tile.Cost > points;
     
     private TileDeck deck = GD.Load<TileDeck>("res://Deck.tres");
-    private Dictionary<Button, WormTile> buttonToTile = new Dictionary<Button, WormTile>();
-    private Dictionary<WormTile, Button> boughtTileToButton = new Dictionary<WormTile, Button>();
+    private Dictionary<TextureButton, WormTile> buttonToTile = new Dictionary<TextureButton, WormTile>();
+    private Dictionary<WormTile, TextureButton> boughtTileToButton = new Dictionary<WormTile, TextureButton>();
 }
