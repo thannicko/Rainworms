@@ -101,10 +101,11 @@ ThrowDiceContainer = NodePath("../../CanvasLayer/ThrowDiceMargin/ThrowDiceContai
 DiceAnimation = NodePath("../../CanvasLayer/DiceThrowAnimation")
 PromptLabel = NodePath("../../CanvasLayer/PromptLabel")
 
-[node name="KeepDiceState" type="Node" parent="TurnStateMachine" node_paths=PackedStringArray("ThrowDiceContainer", "KeepDiceContainer")]
+[node name="KeepDiceState" type="Node" parent="TurnStateMachine" node_paths=PackedStringArray("ThrowDiceContainer", "KeepDiceContainer", "DeckController")]
 script = ExtResource("4_cdyae")
 ThrowDiceContainer = NodePath("../../CanvasLayer/ThrowDiceMargin/ThrowDiceContainer")
 KeepDiceContainer = NodePath("../../CanvasLayer/KeepDiceContianer/KeepDiceContainer")
+DeckController = NodePath("../../DeckController")
 
 [node name="StopThrowState" type="Node" parent="TurnStateMachine" node_paths=PackedStringArray("PromptLabel", "ThrowDiceButton", "DeckController")]
 script = ExtResource("5_cqkhe")
