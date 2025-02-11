@@ -79,7 +79,6 @@ public partial class DeckController : Node
 
     private TextureButton SpawnButton(WormTile tile)
     {
-        GD.Print("DeckController :: SpawnButton ", tile);
         var button = new TextureButton();
         button.StretchMode = TextureButton.StretchModeEnum.KeepAspectCentered;
         button.TextureNormal = tile.TextureNormal;
@@ -96,6 +95,8 @@ public partial class DeckController : Node
         deck.Tiles.Remove(tile);
         TilesContainer.RemoveChild(button);
         BoughtTilesContainer.AddChild(button);
+        BoughtTilesContainer.MoveChild(button, 0);
+
         boughtTileToButton[tile] = button;
         EmitSignal(SignalName.TileBought, tile);
         GD.Print("DeckController :: Bought tile: ", tile.BoughtInfo());

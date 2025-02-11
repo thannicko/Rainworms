@@ -20,6 +20,9 @@ public partial class InitialThrowState : State
     [Export]
     public Label PlayerNameLabel { get; set; }
 
+    [Export]
+    public Label PlayerScoreLabel { get; set; }
+
     private TurnStateMachine turnStateMachine { get => (TurnStateMachine)stateMachine; }
 
     public override void Enter(object[] data)
@@ -33,6 +36,9 @@ public partial class InitialThrowState : State
         PromptLabel.Text = "Throw the dice!";
         PromptLabel.Show();
 
+        PlayerScoreLabel.Text = "Score: " + turnStateMachine.Player.NumberOfWormsBought().ToString();
+        PlayerScoreLabel.Show();
+        
         PlayerNameLabel.Text = "Player: " + turnStateMachine.Player.Name;
         PlayerNameLabel.Show();
 

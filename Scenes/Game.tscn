@@ -81,7 +81,7 @@ TurnController = NodePath("../TurnStateMachine")
 script = ExtResource("1_am2hy")
 TotalLabel = NodePath("../CanvasLayer/KeepDiceContianer/TotalLabel")
 
-[node name="InitialThrowState" type="Node" parent="TurnStateMachine" node_paths=PackedStringArray("ThrowDiceButton", "ThrowDiceContainer", "KeepDiceContainer", "TotalLabel", "PromptLabel", "PlayerNameLabel")]
+[node name="InitialThrowState" type="Node" parent="TurnStateMachine" node_paths=PackedStringArray("ThrowDiceButton", "ThrowDiceContainer", "KeepDiceContainer", "TotalLabel", "PromptLabel", "PlayerNameLabel", "PlayerScoreLabel")]
 script = ExtResource("2_rp1xf")
 ThrowDiceButton = NodePath("../../CanvasLayer/ActionsContainer/ThrowDiceButton")
 ThrowDiceContainer = NodePath("../../CanvasLayer/ThrowDiceMargin/ThrowDiceContainer")
@@ -89,6 +89,7 @@ KeepDiceContainer = NodePath("../../CanvasLayer/KeepDiceContianer/KeepDiceContai
 TotalLabel = NodePath("../../CanvasLayer/KeepDiceContianer/TotalLabel")
 PromptLabel = NodePath("../../CanvasLayer/PromptLabel")
 PlayerNameLabel = NodePath("../../CanvasLayer/PlayerNameLabel")
+PlayerScoreLabel = NodePath("../../CanvasLayer/PlayerScoreLabel")
 
 [node name="ThrowingState" type="Node" parent="TurnStateMachine" node_paths=PackedStringArray("ThrowDiceButton", "ThrowDiceContainer", "DiceAnimation", "PromptLabel")]
 script = ExtResource("3_5ii2w")
@@ -108,29 +109,31 @@ PromptLabel = NodePath("../../CanvasLayer/PromptLabel")
 ThrowDiceButton = NodePath("../../CanvasLayer/ActionsContainer/ThrowDiceButton")
 DeckController = NodePath("../../DeckController")
 
-[node name="WaitRethrowState" type="Node" parent="TurnStateMachine" node_paths=PackedStringArray("PromptLabel", "ThrowDiceButton", "ThrowDiceContainer", "DeckController")]
+[node name="WaitRethrowState" type="Node" parent="TurnStateMachine" node_paths=PackedStringArray("PromptLabel", "ThrowDiceButton", "ThrowDiceContainer", "DeckController", "PlayerScoreLabel")]
 script = ExtResource("6_pjf3t")
 PromptLabel = NodePath("../../CanvasLayer/PromptLabel")
 ThrowDiceButton = NodePath("../../CanvasLayer/ActionsContainer/ThrowDiceButton")
 ThrowDiceContainer = NodePath("../../CanvasLayer/ThrowDiceMargin/ThrowDiceContainer")
 DeckController = NodePath("../../DeckController")
+PlayerScoreLabel = NodePath("../../CanvasLayer/PlayerScoreLabel")
 
 [node name="CanvasLayer" type="CanvasLayer" parent="."]
 
 [node name="PlayerNameLabel" type="Label" parent="CanvasLayer"]
 custom_minimum_size = Vector2(0, 30)
-anchors_preset = 3
-anchor_left = 1.0
-anchor_top = 1.0
-anchor_right = 1.0
-anchor_bottom = 1.0
-offset_left = -159.0
-offset_top = -30.0
-grow_horizontal = 0
-grow_vertical = 0
+offset_right = 159.0
+offset_bottom = 30.0
 text = "Player name"
 horizontal_alignment = 1
 vertical_alignment = 1
+
+[node name="PlayerScoreLabel" type="Label" parent="CanvasLayer"]
+custom_minimum_size = Vector2(0, 30)
+offset_left = 31.0
+offset_top = 25.0
+offset_right = 124.0
+offset_bottom = 55.0
+text = "Score: 0"
 
 [node name="PromptLabel" type="Label" parent="CanvasLayer"]
 custom_minimum_size = Vector2(0, 30)
@@ -236,16 +239,15 @@ grow_horizontal = 2
 grow_vertical = 2
 
 [node name="BoughtTilesContainer" type="VFlowContainer" parent="CanvasLayer"]
-custom_minimum_size = Vector2(0, 5)
+custom_minimum_size = Vector2(150, 5)
 anchors_preset = 7
 anchor_left = 0.5
 anchor_top = 1.0
 anchor_right = 0.5
 anchor_bottom = 1.0
-offset_left = 391.0
-offset_top = -331.0
-offset_right = 396.0
-offset_bottom = -291.0
+offset_left = 74.0
+offset_top = -46.0
+offset_right = 440.0
+offset_bottom = -6.0
 grow_horizontal = 2
 grow_vertical = 0
-size_flags_horizontal = 3

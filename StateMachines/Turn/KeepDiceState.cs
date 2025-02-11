@@ -21,7 +21,7 @@ public partial class KeepDiceState : State
         turnStateMachine.keptDices[keepDice] = turnStateMachine.diceFrequencies[keepDice];
         turnStateMachine.NrDicesLeft -= turnStateMachine.keptDices[keepDice];
         turnStateMachine.SetPointsEarned(GetPointsEarned(turnStateMachine.keptDices));
-        if (turnStateMachine.NrDicesLeft <= 0)
+        if (turnStateMachine.NrDicesLeft <= 0 && turnStateMachine.HasBoughtTileThisTurn)
         {
             turnStateMachine.ChangeToState("StopThrowState");
         }

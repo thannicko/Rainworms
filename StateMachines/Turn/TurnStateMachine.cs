@@ -12,7 +12,10 @@ public partial class TurnStateMachine : StateMachine
     public Player Player { get; private set; }
 
     public int PointsEarnedInTurn { get => Player.PointsEarnedInTurn; }
+
     public bool IsValidThrow { get => invalidThrowType == InvalidThrowType.VALID; }
+
+    public bool HasBoughtTileThisTurn { get; set; } = false;
 
     public int NrDicesLeft { get; set; } = MaxThrows;
 
@@ -46,8 +49,12 @@ public partial class TurnStateMachine : StateMachine
 
     public void BuyTile(WormTile tile)
     {
-        SetPointsEarned(0);
-        Player.TilesBought.Add(tile);
+        if (!HasBoughtTileThisTurn)
+        {
+            SetPointsEarned(0);
+            Player.TilesBought.Add(tile);
+            HasBoughtTileThisTurn = true;
+        }
     }
 
     public void SetPlayer(Player newPlayer)
@@ -68,6 +75,7 @@ public partial class TurnStateMachine : StateMachine
         invalidThrowType = InvalidThrowType.VALID;
         keptDices.Clear();
         NrDicesLeft = MaxThrows;
+        HasBoughtTileThisTurn = false;
     }
 
     public void ResetThrowCounts()
