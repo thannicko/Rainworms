@@ -13,9 +13,6 @@ public partial class WaitRethrowState : State
 
     [Export]
     public DeckController DeckController { get; set; }
-    
-    [Export]
-    public Label PlayerScoreLabel { get; set; }
 
     private TurnStateMachine turnStateMachine { get => (TurnStateMachine)stateMachine; }
 
@@ -44,7 +41,6 @@ public partial class WaitRethrowState : State
     private void OnTileBought(WormTile tile)
     {
         turnStateMachine.BuyTile(tile);
-        PlayerScoreLabel.Text = "Score: " + turnStateMachine.Player.NumberOfWormsBought().ToString();
         turnStateMachine.ChangeToState("EndTurnState");
         PromptLabel.Text = "Successfully bought: " + tile.BoughtInfo();
     }

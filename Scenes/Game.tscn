@@ -92,7 +92,7 @@ BoughtTilesContainer = NodePath("../../CanvasLayer/BoughtTilesContainer")
 TotalLabel = NodePath("../../CanvasLayer/KeepDiceContianer/TotalLabel")
 PromptLabel = NodePath("../../CanvasLayer/PromptLabel")
 PlayerNameLabel = NodePath("../../CanvasLayer/PlayerNameLabel")
-PlayerScoreLabel = NodePath("../../CanvasLayer/PlayerScoreLabel")
+PlayerScoreLabel = NodePath("")
 ScoreboardLabel = NodePath("../../CanvasLayer/ScoreBoardLabel")
 
 [node name="ThrowingState" type="Node" parent="TurnStateMachine" node_paths=PackedStringArray("ThrowDiceButton", "ThrowDiceContainer", "DiceAnimation", "PromptLabel")]
@@ -119,7 +119,7 @@ PromptLabel = NodePath("../../CanvasLayer/PromptLabel")
 ThrowDiceButton = NodePath("../../CanvasLayer/ActionsContainer/ThrowDiceButton")
 ThrowDiceContainer = NodePath("../../CanvasLayer/ThrowDiceMargin/ThrowDiceContainer")
 DeckController = NodePath("../../DeckController")
-PlayerScoreLabel = NodePath("../../CanvasLayer/PlayerScoreLabel")
+PlayerScoreLabel = NodePath("")
 
 [node name="EndTurnState" type="Node" parent="TurnStateMachine" node_paths=PackedStringArray("PromptLabel", "DeckController")]
 script = ExtResource("8_ulig8")
@@ -134,16 +134,6 @@ custom_minimum_size = Vector2(0, 30)
 offset_right = 159.0
 offset_bottom = 30.0
 text = "Player name"
-horizontal_alignment = 1
-vertical_alignment = 1
-
-[node name="PlayerScoreLabel" type="Label" parent="CanvasLayer"]
-custom_minimum_size = Vector2(0, 30)
-offset_left = 31.0
-offset_top = 25.0
-offset_right = 124.0
-offset_bottom = 55.0
-text = "Score: 0"
 horizontal_alignment = 1
 vertical_alignment = 1
 

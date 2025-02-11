@@ -24,9 +24,6 @@ public partial class InitialThrowState : State
     public Label PlayerNameLabel { get; set; }
 
     [Export]
-    public Label PlayerScoreLabel { get; set; }
-
-    [Export]
     public Label ScoreboardLabel { get; set; }
 
     private TurnStateMachine turnStateMachine { get => (TurnStateMachine)stateMachine; }
@@ -43,9 +40,6 @@ public partial class InitialThrowState : State
 
         PromptLabel.Text = "Throw the dice!";
         PromptLabel.Show();
-
-        PlayerScoreLabel.Text = "Score: " + turnStateMachine.Player.NumberOfWormsBought().ToString();
-        PlayerScoreLabel.Show();
         
         PlayerNameLabel.Text = "Player: " + turnStateMachine.Player.Name;
         PlayerNameLabel.Show();
