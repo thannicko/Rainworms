@@ -12,11 +12,11 @@ public partial class TurnStateMachine : StateMachine
     public Player Player { get; private set; }
 
     public int PointsEarnedInTurn { get => Player.PointsEarnedInTurn; }
-    public bool IsValidThrow { get; private set; }
+    public bool IsValidThrow { get => invalidThrowType == InvalidThrowType.VALID; }
 
     public int NrDicesLeft { get; set; } = MaxThrows;
 
-    public enum InvalidThrowType { NO_DICES, NO_wORM, NO_TILES }
+    public enum InvalidThrowType { VALID, NO_DICES, NO_wORM, NO_TILES }
 
     private const int MaxThrows = 8;
     private const int Worm = 6;
@@ -65,7 +65,7 @@ public partial class TurnStateMachine : StateMachine
     public void Reset()
     {
         ResetThrowCounts();
-        IsValidThrow = false;
+        invalidThrowType = InvalidThrowType.VALID;
         keptDices.Clear();
         NrDicesLeft = MaxThrows;
     }
@@ -77,7 +77,7 @@ public partial class TurnStateMachine : StateMachine
 
     public void InvalidateThrow(InvalidThrowType reason)
     {
-        IsValidThrow = false;
+        GD.Print("TurnStateMachine :: Invalidate throw: ", reason);
         invalidThrowType = reason;
     }
 
@@ -102,7 +102,7 @@ public partial class TurnStateMachine : StateMachine
         TotalLabel.Show();
     }
 
-    private InvalidThrowType invalidThrowType;
+    private InvalidThrowType invalidThrowType = InvalidThrowType.VALID;
     public Dictionary<int, int> diceFrequencies = new Dictionary<int, int>();
     public Dictionary<int, int> keptDices = new Dictionary<int, int>();
 }
