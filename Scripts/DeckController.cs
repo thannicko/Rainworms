@@ -40,15 +40,18 @@ public partial class DeckController : Node
 
     public void ReturnLastBoughtTilesToDeck(Player player)
     {
-        WormTile lastBoughtTile = player.TilesBought.Last();
+
+        WormTile lastBoughtTile = player.TilesBought.LastOrDefault();
         if (lastBoughtTile == null)
             return;
-        
+            
         deck.Tiles.Add(lastBoughtTile);
-        deck.Tiles.OrderBy(tile => tile.Cost);
+        var orderedTiles = deck.Tiles.OrderBy(tile => tile.Cost).ToList();
+        deck.Tiles = new Godot.Collections.Array<WormTile>(orderedTiles);
 
         TextureButton lastBoughtButton = boughtTileToButton[lastBoughtTile];
         TextureButton toReturnToDeck = SpawnButton(lastBoughtTile);
+
         TilesContainer.AddChild(toReturnToDeck);
         TilesContainer.MoveChild(toReturnToDeck, deck.Tiles.IndexOf(lastBoughtTile));
         buttonToTile[toReturnToDeck] = lastBoughtTile;
@@ -93,6 +96,7 @@ public partial class DeckController : Node
         deck.Tiles.Remove(tile);
         TilesContainer.RemoveChild(button);
         BoughtTilesContainer.AddChild(button);
+        boughtTileToButton[tile] = button;
         EmitSignal(SignalName.TileBought, tile);
         GD.Print("DeckController :: Bought tile: ", tile.BoughtInfo());
     }
