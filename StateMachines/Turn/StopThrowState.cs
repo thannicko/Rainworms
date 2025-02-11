@@ -40,17 +40,17 @@ public partial class StopThrowState : State
 
     private async void TakeInvalidAction()
     {
-        PromptLabel.Text = "Disabling the next highest tile...";
-        await ToSignal(GetTree().CreateTimer(1.0), Timer.SignalName.Timeout);
-        DeckController.DisableNextHighestTile();
-        await ToSignal(GetTree().CreateTimer(1.0), Timer.SignalName.Timeout);
-
         if (turnStateMachine.Player.TilesBought.Count > 0)
         {
             PromptLabel.Text = "Returning player's top tile to the deck...";
             DeckController.ReturnLastBoughtTilesToDeck(PlayerController.Instance.ActivePlayer);
             await ToSignal(GetTree().CreateTimer(1.0), Timer.SignalName.Timeout);
         }
+
+        PromptLabel.Text = "Disabling the next highest tile...";
+        await ToSignal(GetTree().CreateTimer(1.0), Timer.SignalName.Timeout);
+        DeckController.DisableNextHighestTile();
+        await ToSignal(GetTree().CreateTimer(1.0), Timer.SignalName.Timeout);
         
         turnStateMachine.ChangeToState("EndTurnState");
     }

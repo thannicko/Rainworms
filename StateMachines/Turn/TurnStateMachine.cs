@@ -9,6 +9,9 @@ public partial class TurnStateMachine : StateMachine
     [Export]
     public Label TotalLabel { get; set; }
 
+    [Export]
+    public Label NrDicesLeftLabel { get; set; }
+
     public Player Player { get => PlayerController.Instance.ActivePlayer; }
 
     public int PointsEarnedInTurn { get => Player.PointsEarnedInTurn; }
@@ -17,12 +20,22 @@ public partial class TurnStateMachine : StateMachine
 
     public bool HasBoughtTileThisTurn { get; set; } = false;
 
-    public int NrDicesLeft { get; set; } = MaxThrows;
+    public int NrDicesLeft
+    {
+        get => nrDicesLeft;
+        set
+        {
+            nrDicesLeft = value;
+            NrDicesLeftLabel.Text = nrDicesLeft.ToString() + " dice(s) left";
+        }
+    }
 
     public enum InvalidThrowType { VALID, NO_DICES, NO_wORM, NO_TILES }
 
     private const int MaxThrows = 8;
     private const int Worm = 6;
+
+    private int nrDicesLeft = MaxThrows;
 
     public readonly Dictionary<int, string> diceToTextures = new Dictionary<int, string>(){
         { 1, "res://Assets/dice-one.png" },
