@@ -81,7 +81,6 @@ public partial class InitialThrowState : State
         ScoreboardLabel.Text = "Scoreboard";
         foreach (Player player in PlayerController.Instance.Players)
         {
-            GD.Print("Player: ", player.Name, " + score: ", player.TotalScore.ToString());
             ScoreboardLabel.Text += "\n> " + player.Name + ": " + player.TotalScore.ToString();
         }
     }

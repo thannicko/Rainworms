@@ -1,0 +1,67 @@
+[gd_scene load_steps=3 format=3 uid="uid://bj23bosas0lp1"]
+
+[ext_resource type="Script" path="res://Scripts/CreatePlayers.cs" id="1_6607b"]
+[ext_resource type="PackedScene" uid="uid://c4r3anhiqbtsa" path="res://Scenes/Game.tscn" id="2_q6hpm"]
+
+[node name="CreatePlayers" type="Control" node_paths=PackedStringArray("PlayersInGameLabel", "NameEntry", "AddButton", "StartButton")]
+layout_mode = 3
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+offset_left = 1.0
+offset_top = 1.0
+offset_right = 1.0
+offset_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+script = ExtResource("1_6607b")
+PlayersInGameLabel = NodePath("PlayersInGameLabel")
+NameEntry = NodePath("VBoxContainer/LineEdit")
+AddButton = NodePath("VBoxContainer/AddButton")
+StartButton = NodePath("VBoxContainer/StartButton")
+StartGameScene = ExtResource("2_q6hpm")
+
+[node name="PlayersInGameLabel" type="Label" parent="."]
+layout_mode = 1
+anchors_preset = 7
+anchor_left = 0.5
+anchor_top = 1.0
+anchor_right = 0.5
+anchor_bottom = 1.0
+offset_left = -121.0
+offset_top = -168.0
+offset_right = 121.0
+grow_horizontal = 2
+grow_vertical = 0
+text = "Players in game"
+
+[node name="VBoxContainer" type="VBoxContainer" parent="."]
+custom_minimum_size = Vector2(200, 0)
+layout_mode = 1
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = -100.0
+offset_top = -33.0
+offset_right = 100.0
+offset_bottom = 33.0
+grow_horizontal = 2
+grow_vertical = 2
+
+[node name="Label" type="Label" parent="VBoxContainer"]
+layout_mode = 2
+text = "Add a new player:"
+
+[node name="LineEdit" type="LineEdit" parent="VBoxContainer"]
+layout_mode = 2
+placeholder_text = "Enter name"
+
+[node name="AddButton" type="Button" parent="VBoxContainer"]
+layout_mode = 2
+text = "Add"
+
+[node name="StartButton" type="Button" parent="VBoxContainer"]
+layout_mode = 2
+text = "Start"

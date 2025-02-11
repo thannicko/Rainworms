@@ -3,7 +3,7 @@ using Godot;
 public partial class StartScene : Control
 {
 	[Export]
-	public PackedScene StartGameScene { get; set; }
+	public PackedScene CreatePlayersScene { get; set; }
 
 	private Button StartButton;
 
@@ -15,6 +15,6 @@ public partial class StartScene : Control
 
 	private void ChangeToStartGameScene()
 	{
-		GetTree().ChangeSceneToPacked(StartGameScene);
+		GetTree().ChangeSceneToPacked(CreatePlayersScene);
 	}
 }

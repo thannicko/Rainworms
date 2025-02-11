@@ -6,23 +6,41 @@ public partial class PlayerController : Node
 {
     public static PlayerController Instance { get; private set; }
     public Array<Player> Players { get; private set; } = new Array<Player>();
-    public Player ActivePlayer { get; private set; }
+    private Player activePlayer = null;
+    public Player ActivePlayer
+    {
+        get
+        {
+            if (activePlayer == null)
+                activePlayer = Players.FirstOrDefault();
+            return activePlayer;
+        }
+        set
+        {
+            activePlayer = value;
+        }
+    }
 
     private TileDeck deck = GD.Load<TileDeck>("res://Deck.tres");
 
 	public override void _Ready()
 	{
         Instance  = this;
-        Players.Add(new Player()
-        {
-            Name = "Thannicko"
-        });
-        Players.Add(new Player()
-        {
-            Name = "Frits"
-        });
-        ActivePlayer = Players.FirstOrDefault();
 	}
+
+    public void AddPlayer(string name)
+    {
+        Players.Add(new Player()
+        {
+            Name = name
+        });
+        GD.Print("PlayerController :: Added ", name);
+    }
+
+    public void GameStarted()
+    {
+        ActivePlayer = Players.FirstOrDefault();
+    }
 
     public void ActivePlayerFinished()
     {
