@@ -18,4 +18,16 @@ public partial class Player : RefCounted
     {
         TotalScore += NumberOfWormsBought();
     }
+
+    public WormTile PopLastTile()
+    {
+        if (TilesBought.Count > 0)
+        {
+            var tile = TilesBought.Last();
+            TotalScore -= tile.Worm;
+            TilesBought.Remove(tile);
+            return tile;
+        }
+        return null;
+    }
 }

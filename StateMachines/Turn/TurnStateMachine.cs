@@ -9,7 +9,7 @@ public partial class TurnStateMachine : StateMachine
     [Export]
     public Label TotalLabel { get; set; }
 
-    public Player Player { get; private set; }
+    public Player Player { get => PlayerController.Instance.ActivePlayer; }
 
     public int PointsEarnedInTurn { get => Player.PointsEarnedInTurn; }
 
@@ -55,11 +55,6 @@ public partial class TurnStateMachine : StateMachine
             Player.TilesBought.Add(tile);
             HasBoughtTileThisTurn = true;
         }
-    }
-
-    public void SetPlayer(Player newPlayer)
-    {
-        Player = newPlayer;
     }
 
     public void SetPointsEarned(int points)

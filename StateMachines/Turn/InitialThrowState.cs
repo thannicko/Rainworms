@@ -1,3 +1,4 @@
+using System.Linq;
 using Godot;
 
 public partial class InitialThrowState : State
@@ -30,7 +31,6 @@ public partial class InitialThrowState : State
 
     public override void Enter(object[] data)
     {
-        turnStateMachine.SetPlayer(PlayerController.Instance.ActivePlayer);
         turnStateMachine.Reset();
 
         UpdateScoreBoard();
@@ -41,7 +41,7 @@ public partial class InitialThrowState : State
         PromptLabel.Text = "Throw the dice!";
         PromptLabel.Show();
         
-        PlayerNameLabel.Text = "Player: " + turnStateMachine.Player.Name;
+        PlayerNameLabel.Text = "Player: " + PlayerController.Instance.ActivePlayer.Name;
         PlayerNameLabel.Show();
 
         ThrowDiceButton.Show();
@@ -72,10 +72,19 @@ public partial class InitialThrowState : State
 
     private void UpdateScoreBoard()
     {
-        ScoreboardLabel.Text = "Scoreboard";
+        ScoreboardLabel.Text = "Wormboard";
         foreach (Player player in PlayerController.Instance.Players)
         {
             ScoreboardLabel.Text += "\n> " + player.Name + ": " + player.TotalScore.ToString();
+            ScoreboardLabel.Text += "\n\tLast bought: ";
+            if (player.TilesBought.LastOrDefault() != null)
+            {
+                ScoreboardLabel.Text += player.TilesBought.Last().Cost;
+            }
+            else
+            {
+                ScoreboardLabel.Text += "nothing";
+            }
         }
     }
 }

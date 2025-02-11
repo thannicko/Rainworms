@@ -42,7 +42,7 @@ public partial class EndGame : Control
 
     private void UpdateScoreBoard()
     {
-        ScoreboardLabel.Text = "Scoreboard";
+        ScoreboardLabel.Text = "Wormboard";
         foreach (Player player in PlayerController.Instance.Players)
         {
             ScoreboardLabel.Text += "\n> " + player.Name + ": " + player.TotalScore.ToString();

@@ -1,3 +1,5 @@
+using System.Collections.Generic;
+using System.Linq;
 using Godot;
 
 public partial class WaitRethrowState : State
@@ -9,7 +11,13 @@ public partial class WaitRethrowState : State
     public Button ThrowDiceButton { get; set; }
     
     [Export]
+    public Button StealButton { get; set; }
+    
+    [Export]
     public Container ThrowDiceContainer { get; set; }
+    
+    [Export]
+    public Container StealTargetsContainer { get; set; }
 
     [Export]
     public DeckController DeckController { get; set; }
@@ -27,6 +35,9 @@ public partial class WaitRethrowState : State
             ThrowDiceButton.ButtonDown += OnThrowDiceButtonDown;
         }
 
+        CheckAndRenderStealCondition();
+        StealButton.ButtonDown += StealTargetsContainer.Show;
+
         DeckController.IsBuyingEnabled = true;
         DeckController.TileBought += OnTileBought;
     }
@@ -36,6 +47,53 @@ public partial class WaitRethrowState : State
         DeckController.IsBuyingEnabled = false;
         ThrowDiceButton.ButtonDown -= OnThrowDiceButtonDown;
         DeckController.TileBought -= OnTileBought;
+        StealButton.ButtonDown -= StealTargetsContainer.Show;
+    }
+
+    private void CheckAndRenderStealCondition()
+    {
+        if (IsStealPossible())
+        {
+            ClearContainer(StealTargetsContainer);
+            foreach (Player player in possibleSteals)
+            {
+                var button = new Button();
+                button.Text = player.Name;
+                button.ButtonDown += () => StealFrom(player);
+                StealTargetsContainer.AddChild(button);
+            }
+            StealButton.Show();
+        }
+        else
+        {
+            StealButton.Hide();
+            StealTargetsContainer.Hide();
+        }
+    }
+
+    private void StealFrom(Player target)
+    {
+        WormTile tile = target.PopLastTile();
+        PromptLabel.Text = PlayerController.Instance.ActivePlayer.Name
+            + " stole tile '" + tile.Cost + "' from "
+            + target.Name;
+        turnStateMachine.BuyTile(tile);
+        turnStateMachine.ChangeToState("EndTurnState");
+    }
+
+    private bool IsStealPossible()
+    {
+        // rig code
+        if (PlayerController.Instance.ActivePlayer.Name == "annick")
+            turnStateMachine.SetPointsEarned(25);
+
+        possibleSteals.Clear();
+        possibleSteals = PlayerController.Instance.Players.Where(
+            player => player.TilesBought.LastOrDefault() != null &&
+                    player.TilesBought.Last().Cost == turnStateMachine.PointsEarnedInTurn
+        ).ToList();
+        GD.Print("Possible steals count: ", possibleSteals.Count);
+        return possibleSteals.Count > 0;
     }
 
     private void OnTileBought(WormTile tile)
@@ -57,4 +115,6 @@ public partial class WaitRethrowState : State
             child.QueueFree();
         }
     }
+
+    private List<Player> possibleSteals = new List<Player>();
 }

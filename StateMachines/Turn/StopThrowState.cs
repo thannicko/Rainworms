@@ -46,7 +46,7 @@ public partial class StopThrowState : State
 
         PromptLabel.Text = "Returning player's top tile to the deck...";
         await ToSignal(GetTree().CreateTimer(1.0), Timer.SignalName.Timeout);
-        DeckController.ReturnLastBoughtTilesToDeck(turnStateMachine.Player);
+        DeckController.ReturnLastBoughtTilesToDeck(PlayerController.Instance.ActivePlayer);
         
         await ToSignal(GetTree().CreateTimer(1.0), Timer.SignalName.Timeout);
         turnStateMachine.ChangeToState("EndTurnState");
