@@ -17,7 +17,7 @@ public partial class EndGame : Control
 	
 	public override void _Ready()
 	{
-		WinnerLabel.Text = PlayerController.Instance.Winner() == null ? "No winner" : PlayerController.Instance.Winner().Name;
+		WinnerLabel.Text = PlayerController.Instance.Winner() == null ? "No winner" : "'" + PlayerController.Instance.Winner().Name + "' won!";
 		RestartButton.ButtonDown += OnRestartButtonDown;
 		ExitButton.ButtonDown += OnExitButtonDown;
 		UpdateScoreBoard();

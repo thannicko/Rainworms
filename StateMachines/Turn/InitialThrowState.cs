@@ -27,6 +27,9 @@ public partial class InitialThrowState : State
     [Export]
     public Label ScoreboardLabel { get; set; }
 
+    [Export]
+    public DeckController DeckController { get; set; }
+
     private TurnStateMachine turnStateMachine { get => (TurnStateMachine)stateMachine; }
 
     public override void Enter(object[] data)
@@ -49,7 +52,11 @@ public partial class InitialThrowState : State
         
         ClearContainer(ThrowDiceContainer);
         ClearContainer(KeepDiceContainer);
+
+        BoughtTilesContainer.Hide();
         ClearContainer(BoughtTilesContainer);
+        DeckController.RenderBoughtTiles(turnStateMachine.Player);
+        BoughtTilesContainer.Show();
     }
 
     public override void Exit()
@@ -76,7 +83,7 @@ public partial class InitialThrowState : State
         foreach (Player player in PlayerController.Instance.Players)
         {
             ScoreboardLabel.Text += "\n> " + player.Name + ": " + player.TotalScore.ToString();
-            ScoreboardLabel.Text += "\n\tLast bought: ";
+            ScoreboardLabel.Text += "\n\tLast owned: ";
             if (player.TilesBought.LastOrDefault() != null)
             {
                 ScoreboardLabel.Text += player.TilesBought.Last().Cost;

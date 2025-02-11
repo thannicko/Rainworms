@@ -11,8 +11,12 @@ public partial class EndTurnState : State
 	[Export]
 	public PackedScene EndGameScene { get; set; }
 
+    [Export]
+    public Button ThrowDiceButton { get; set; }
+
     public override async void Enter(object[] data)
     {
+        ThrowDiceButton.Disabled = true;
         var lastPlayer = PlayerController.Instance.ActivePlayer;
         PlayerController.Instance.ActivePlayerFinished();
 
@@ -35,7 +39,7 @@ public partial class EndTurnState : State
 
     private bool IsGameFinished()
     {
-         return DeckController.NumberOfTilesLeft == 0;
+        return DeckController.NumberOfTilesLeft == 0;
     }
 
     public override void Exit()

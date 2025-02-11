@@ -48,6 +48,8 @@ public partial class WaitRethrowState : State
         ThrowDiceButton.ButtonDown -= OnThrowDiceButtonDown;
         DeckController.TileBought -= OnTileBought;
         StealButton.ButtonDown -= StealTargetsContainer.Show;
+        StealButton.Hide();
+        StealTargetsContainer.Hide();
     }
 
     private void CheckAndRenderStealCondition()
@@ -77,7 +79,9 @@ public partial class WaitRethrowState : State
         PromptLabel.Text = PlayerController.Instance.ActivePlayer.Name
             + " stole tile '" + tile.Cost + "' from "
             + target.Name;
+        GD.Print("WaitRethrowState :: " + PromptLabel.Text);
         turnStateMachine.BuyTile(tile);
+        DeckController.AddToBoughtTile(tile);
         turnStateMachine.ChangeToState("EndTurnState");
     }
 
@@ -85,11 +89,11 @@ public partial class WaitRethrowState : State
     {
         possibleSteals.Clear();
         possibleSteals = PlayerController.Instance.Players.Where(
-            player => player.TilesBought.LastOrDefault() != null &&
+            player => player != turnStateMachine.Player &&
+                    player.TilesBought.LastOrDefault() != null &&
                     player.TilesBought.Last().Cost == turnStateMachine.PointsEarnedInTurn
         ).ToList();
-        GD.Print("Possible steals count: ", possibleSteals.Count);
-        return possibleSteals.Count > 0;
+        return possibleSteals.Count > 0 && !turnStateMachine.HasNoWorms();
     }
 
     private void OnTileBought(WormTile tile)

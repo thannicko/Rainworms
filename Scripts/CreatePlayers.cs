@@ -19,8 +19,16 @@ public partial class CreatePlayers : Control
 	{
 		AddButton.ButtonDown += OnAddButtonDown;
 		StartButton.ButtonDown += OnStartButtonDown;
+		NameEntry.TextChanged += CheckText;
 		PlayersInGameLabel.Hide();
-		StartButton.Disabled = true;
+		AddButton.Disabled = true;
+		StartButton.Disabled = PlayerController.Instance.Players.Count <= 1;
+		UpdatePlayersInGame();
+	}
+
+	private void CheckText(string newText)
+	{
+		AddButton.Disabled = newText == "";
 	}
 
 	private void OnAddButtonDown()
@@ -39,6 +47,8 @@ public partial class CreatePlayers : Control
 	private void UpdatePlayersInGame()
 	{
 		PlayersInGameLabel.Text = "Players in game";
+		if (PlayerController.Instance.Players.Count == 0)
+			PlayersInGameLabel.Text += "\n> None";
 		foreach (Player player in PlayerController.Instance.Players)
 		{
 			PlayersInGameLabel.Text += "\n> " + player.Name;

@@ -53,7 +53,7 @@ public partial class PlayerController : Node
     {
         var activeIndex = Players.IndexOf(ActivePlayer);
         var nextIndex = (activeIndex + 1) % Players.Count;
-        ActivePlayer.PlayerTurnFinished();
+        GD.Print("PlayerController :: Current player: ", activePlayer.Name, "-> new player ", Players.ElementAt(nextIndex).Name);
         ActivePlayer = Players.ElementAt(nextIndex);
     }
 }

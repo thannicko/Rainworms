@@ -36,28 +36,50 @@ public partial class DeckController : Node
     public void DisableNextHighestTile()
     {
         Node nextHighestTile = TilesContainer.GetChildren().Last();
+        deck.Tiles.Remove(deck.Tiles.Last());
         TilesContainer.GetChildren().Remove(nextHighestTile);
         nextHighestTile.QueueFree();
     }
 
     public void ReturnLastBoughtTilesToDeck(Player player)
     {
-
-        WormTile lastBoughtTile = player.TilesBought.LastOrDefault();
+        WormTile lastBoughtTile = player.PopLastTile();
         if (lastBoughtTile == null)
             return;
             
+        GD.Print("DeckController :: Returning to the deck ", lastBoughtTile.BuyInfo());
+
         deck.Tiles.Add(lastBoughtTile);
         var orderedTiles = deck.Tiles.OrderBy(tile => tile.Cost).ToList();
         deck.Tiles = new Godot.Collections.Array<WormTile>(orderedTiles);
 
-        TextureButton lastBoughtButton = boughtTileToButton[lastBoughtTile];
         TextureButton toReturnToDeck = SpawnButton(lastBoughtTile);
-
         TilesContainer.AddChild(toReturnToDeck);
         TilesContainer.MoveChild(toReturnToDeck, deck.Tiles.IndexOf(lastBoughtTile));
         buttonToTile[toReturnToDeck] = lastBoughtTile;
-        lastBoughtButton.QueueFree();
+        
+        BoughtTilesContainer.RemoveChild(boughtTileToButton[lastBoughtTile]);
+        boughtTileToButton.Remove(lastBoughtTile);
+    }
+
+    public void RenderBoughtTiles(Player player)
+    {
+        foreach (WormTile tile in player.TilesBought)
+        {
+            AddToBoughtTile(tile);
+        }
+    }
+
+    public void AddToBoughtTile(WormTile tile)
+    {
+        AddToBoughtTile(tile, SpawnButton(tile, disabled: false));
+    }
+
+    public void AddToBoughtTile(WormTile tile, TextureButton button)
+    {
+        BoughtTilesContainer.AddChild(button);
+        BoughtTilesContainer.MoveChild(button, 0);
+        boughtTileToButton[tile] = button;
     }
 
     private void DrawDeck()
@@ -79,13 +101,14 @@ public partial class DeckController : Node
         }
     }
 
-    private TextureButton SpawnButton(WormTile tile)
+    private TextureButton SpawnButton(WormTile tile, bool disabled = true)
     {
+        GD.Print("DeckController :: SpawnButton tile: ", tile.BoughtInfo());
         var button = new TextureButton();
         button.StretchMode = TextureButton.StretchModeEnum.KeepAspectCentered;
         button.TextureNormal = tile.TextureNormal;
         button.TextureDisabled = tile.TextureDisabled;
-        button.Disabled = true;
+        button.Disabled = disabled;
         button.ButtonDown += () => BuyTile(tile, button);
         return button;
     }
@@ -94,14 +117,21 @@ public partial class DeckController : Node
     {
         if (!IsBuyingEnabled || BoughtTilesContainer.GetChildren().Contains(button))
             return;
+
         deck.Tiles.Remove(tile);
         TilesContainer.RemoveChild(button);
-        BoughtTilesContainer.AddChild(button);
-        BoughtTilesContainer.MoveChild(button, 0);
-
-        boughtTileToButton[tile] = button;
+        AddToBoughtTile(tile, button);
+        SetDisabledAllTiles(true);
         EmitSignal(SignalName.TileBought, tile);
         GD.Print("DeckController :: Bought tile: ", tile.BoughtInfo());
+    }
+
+    private void SetDisabledAllTiles(bool disabled)
+    {
+        foreach (TextureButton button in TilesContainer.GetChildren())
+        {
+            button.Disabled = disabled;
+        }
     }
     
     private bool IsTileTooExpensive(WormTile tile, int points) => tile.Cost > points;

@@ -83,7 +83,7 @@ TurnController = NodePath("../TurnStateMachine")
 script = ExtResource("1_am2hy")
 TotalLabel = NodePath("../CanvasLayer/KeepDiceContianer/TotalLabel")
 
-[node name="InitialThrowState" type="Node" parent="TurnStateMachine" node_paths=PackedStringArray("ThrowDiceButton", "ThrowDiceContainer", "KeepDiceContainer", "BoughtTilesContainer", "TotalLabel", "PromptLabel", "PlayerNameLabel", "ScoreboardLabel")]
+[node name="InitialThrowState" type="Node" parent="TurnStateMachine" node_paths=PackedStringArray("ThrowDiceButton", "ThrowDiceContainer", "KeepDiceContainer", "BoughtTilesContainer", "TotalLabel", "PromptLabel", "PlayerNameLabel", "ScoreboardLabel", "DeckController")]
 script = ExtResource("2_rp1xf")
 ThrowDiceButton = NodePath("../../CanvasLayer/ActionsContainer/ThrowDiceButton")
 ThrowDiceContainer = NodePath("../../CanvasLayer/ThrowDiceMargin/ThrowDiceContainer")
@@ -93,6 +93,7 @@ TotalLabel = NodePath("../../CanvasLayer/KeepDiceContianer/TotalLabel")
 PromptLabel = NodePath("../../CanvasLayer/PromptLabel")
 PlayerNameLabel = NodePath("../../CanvasLayer/PlayerNameLabel")
 ScoreboardLabel = NodePath("../../CanvasLayer/ScoreBoardLabel")
+DeckController = NodePath("../../DeckController")
 
 [node name="ThrowingState" type="Node" parent="TurnStateMachine" node_paths=PackedStringArray("ThrowDiceButton", "ThrowDiceContainer", "DiceAnimation", "PromptLabel")]
 script = ExtResource("3_5ii2w")
@@ -122,11 +123,12 @@ ThrowDiceContainer = NodePath("../../CanvasLayer/ThrowDiceMargin/ThrowDiceContai
 StealTargetsContainer = NodePath("../../CanvasLayer/StealTargetsContainer")
 DeckController = NodePath("../../DeckController")
 
-[node name="EndTurnState" type="Node" parent="TurnStateMachine" node_paths=PackedStringArray("PromptLabel", "DeckController")]
+[node name="EndTurnState" type="Node" parent="TurnStateMachine" node_paths=PackedStringArray("PromptLabel", "DeckController", "ThrowDiceButton")]
 script = ExtResource("8_ulig8")
 PromptLabel = NodePath("../../CanvasLayer/PromptLabel")
 DeckController = NodePath("../../DeckController")
 EndGameScene = ExtResource("9_ojba6")
+ThrowDiceButton = NodePath("../../CanvasLayer/ActionsContainer/ThrowDiceButton")
 
 [node name="CanvasLayer" type="CanvasLayer" parent="."]
 
