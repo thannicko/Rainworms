@@ -1,4 +1,5 @@
 using System.Linq;
+using System.Threading.Tasks;
 using Godot;
 
 public partial class InitialThrowState : State
@@ -32,8 +33,9 @@ public partial class InitialThrowState : State
 
     private TurnStateMachine turnStateMachine { get => (TurnStateMachine)stateMachine; }
 
-    public override void Enter(object[] data)
+    public override async void Enter(object[] data)
     {
+
         turnStateMachine.Reset();
 
         UpdateScoreBoard();
@@ -54,9 +56,13 @@ public partial class InitialThrowState : State
         ClearContainer(KeepDiceContainer);
 
         BoughtTilesContainer.Hide();
+        await ToSignal(GetTree(), SceneTree.SignalName.ProcessFrame);
         ClearContainer(BoughtTilesContainer);
         DeckController.RenderBoughtTiles(turnStateMachine.Player);
+        BoughtTilesContainer.Modulate = Colors.DimGray;
         BoughtTilesContainer.Show();
+        Tween tween = GetTree().CreateTween();
+        tween.TweenProperty(BoughtTilesContainer, "modulate", Colors.White, 0.2f).SetTrans(Tween.TransitionType.Sine);
     }
 
     public override void Exit()

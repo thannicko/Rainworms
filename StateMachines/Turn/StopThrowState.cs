@@ -28,9 +28,9 @@ public partial class StopThrowState : State
         if (!turnStateMachine.IsValidThrow)
         {
             PromptLabel.Text = "Invalid throw: " + turnStateMachine.InvalidThrowReason();
+            await ToSignal(GetTree().CreateTimer(1.0), Timer.SignalName.Timeout);
             PromptLabel.Show();
             TakeInvalidAction();
-            await ToSignal(GetTree().CreateTimer(1.0), Timer.SignalName.Timeout);
         }
     }
 
