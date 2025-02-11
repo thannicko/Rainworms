@@ -12,6 +12,9 @@ public partial class InitialThrowState : State
     public Container KeepDiceContainer { get; set; }
     
     [Export]
+    public Container BoughtTilesContainer { get; set; }
+    
+    [Export]
     public Label TotalLabel { get; set; }
     
     [Export]
@@ -23,12 +26,17 @@ public partial class InitialThrowState : State
     [Export]
     public Label PlayerScoreLabel { get; set; }
 
+    [Export]
+    public Label ScoreboardLabel { get; set; }
+
     private TurnStateMachine turnStateMachine { get => (TurnStateMachine)stateMachine; }
 
     public override void Enter(object[] data)
     {
         turnStateMachine.SetPlayer(PlayerController.Instance.ActivePlayer);
         turnStateMachine.Reset();
+
+        UpdateScoreBoard();
 
         ThrowDiceButton.Disabled = false;
         ThrowDiceButton.ButtonDown += OnThrowDiceButtonDown;
@@ -44,8 +52,10 @@ public partial class InitialThrowState : State
 
         ThrowDiceButton.Show();
         TotalLabel.Hide();
+        
         ClearContainer(ThrowDiceContainer);
         ClearContainer(KeepDiceContainer);
+        ClearContainer(BoughtTilesContainer);
     }
 
     public override void Exit()
@@ -63,6 +73,16 @@ public partial class InitialThrowState : State
         foreach (var child in container.GetChildren())
         {
             child.QueueFree();
+        }
+    }
+
+    private void UpdateScoreBoard()
+    {
+        ScoreboardLabel.Text = "Scoreboard";
+        foreach (Player player in PlayerController.Instance.Players)
+        {
+            GD.Print("Player: ", player.Name, " + score: ", player.TotalScore.ToString());
+            ScoreboardLabel.Text += "\n> " + player.Name + ": " + player.TotalScore.ToString();
         }
     }
 }

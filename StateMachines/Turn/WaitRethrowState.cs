@@ -45,7 +45,7 @@ public partial class WaitRethrowState : State
     {
         turnStateMachine.BuyTile(tile);
         PlayerScoreLabel.Text = "Score: " + turnStateMachine.Player.NumberOfWormsBought().ToString();
-        turnStateMachine.ChangeToState("InitialThrowState");
+        turnStateMachine.ChangeToState("EndTurnState");
         PromptLabel.Text = "Successfully bought: " + tile.BoughtInfo();
     }
 

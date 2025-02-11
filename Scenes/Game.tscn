@@ -1,4 +1,4 @@
-[gd_scene load_steps=18 format=3 uid="uid://c4r3anhiqbtsa"]
+[gd_scene load_steps=19 format=3 uid="uid://c4r3anhiqbtsa"]
 
 [ext_resource type="Script" path="res://StateMachines/Turn/TurnStateMachine.cs" id="1_am2hy"]
 [ext_resource type="Script" path="res://Scripts/DeckController.cs" id="1_efgpp"]
@@ -8,6 +8,7 @@
 [ext_resource type="Script" path="res://StateMachines/Turn/StopThrowState.cs" id="5_cqkhe"]
 [ext_resource type="Script" path="res://StateMachines/Turn/WaitRethrowState.cs" id="6_pjf3t"]
 [ext_resource type="Texture2D" uid="uid://b4j6dlwlo8ti0" path="res://Assets/six sided die.png" id="8_1koic"]
+[ext_resource type="Script" path="res://StateMachines/Turn/EndTurnState.cs" id="8_ulig8"]
 [ext_resource type="Texture2D" uid="uid://cjlia5ygewjeq" path="res://Assets/dice-worm.png" id="9_3hr2b"]
 
 [sub_resource type="StyleBoxFlat" id="StyleBoxFlat_oy2md"]
@@ -81,15 +82,17 @@ TurnController = NodePath("../TurnStateMachine")
 script = ExtResource("1_am2hy")
 TotalLabel = NodePath("../CanvasLayer/KeepDiceContianer/TotalLabel")
 
-[node name="InitialThrowState" type="Node" parent="TurnStateMachine" node_paths=PackedStringArray("ThrowDiceButton", "ThrowDiceContainer", "KeepDiceContainer", "TotalLabel", "PromptLabel", "PlayerNameLabel", "PlayerScoreLabel")]
+[node name="InitialThrowState" type="Node" parent="TurnStateMachine" node_paths=PackedStringArray("ThrowDiceButton", "ThrowDiceContainer", "KeepDiceContainer", "BoughtTilesContainer", "TotalLabel", "PromptLabel", "PlayerNameLabel", "PlayerScoreLabel", "ScoreboardLabel")]
 script = ExtResource("2_rp1xf")
 ThrowDiceButton = NodePath("../../CanvasLayer/ActionsContainer/ThrowDiceButton")
 ThrowDiceContainer = NodePath("../../CanvasLayer/ThrowDiceMargin/ThrowDiceContainer")
 KeepDiceContainer = NodePath("../../CanvasLayer/KeepDiceContianer/KeepDiceContainer")
+BoughtTilesContainer = NodePath("../../CanvasLayer/BoughtTilesContainer")
 TotalLabel = NodePath("../../CanvasLayer/KeepDiceContianer/TotalLabel")
 PromptLabel = NodePath("../../CanvasLayer/PromptLabel")
 PlayerNameLabel = NodePath("../../CanvasLayer/PlayerNameLabel")
 PlayerScoreLabel = NodePath("../../CanvasLayer/PlayerScoreLabel")
+ScoreboardLabel = NodePath("../../CanvasLayer/ScoreBoardLabel")
 
 [node name="ThrowingState" type="Node" parent="TurnStateMachine" node_paths=PackedStringArray("ThrowDiceButton", "ThrowDiceContainer", "DiceAnimation", "PromptLabel")]
 script = ExtResource("3_5ii2w")
@@ -116,6 +119,10 @@ ThrowDiceButton = NodePath("../../CanvasLayer/ActionsContainer/ThrowDiceButton")
 ThrowDiceContainer = NodePath("../../CanvasLayer/ThrowDiceMargin/ThrowDiceContainer")
 DeckController = NodePath("../../DeckController")
 PlayerScoreLabel = NodePath("../../CanvasLayer/PlayerScoreLabel")
+
+[node name="EndTurnState" type="Node" parent="TurnStateMachine" node_paths=PackedStringArray("PromptLabel")]
+script = ExtResource("8_ulig8")
+PromptLabel = NodePath("../../CanvasLayer/PromptLabel")
 
 [node name="CanvasLayer" type="CanvasLayer" parent="."]
 
@@ -251,3 +258,11 @@ offset_right = 440.0
 offset_bottom = -6.0
 grow_horizontal = 2
 grow_vertical = 0
+
+[node name="ScoreBoardLabel" type="Label" parent="CanvasLayer"]
+custom_minimum_size = Vector2(0, 30)
+offset_left = 987.0
+offset_right = 1146.0
+offset_bottom = 30.0
+text = "Scoreboard"
+vertical_alignment = 1

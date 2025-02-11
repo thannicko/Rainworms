@@ -1,3 +1,4 @@
+using System.Linq;
 using Godot;
 using Godot.Collections;
 
@@ -12,11 +13,22 @@ public partial class PlayerController : Node
 	public override void _Ready()
 	{
         Instance  = this;
-        Player testPlayer = new Player()
+        Players.Add(new Player()
         {
             Name = "Thannicko"
-        };
-        Players.Add(testPlayer);
-        ActivePlayer = testPlayer;
+        });
+        Players.Add(new Player()
+        {
+            Name = "Frits"
+        });
+        ActivePlayer = Players.FirstOrDefault();
 	}
+
+    public void ActivePlayerFinished()
+    {
+        var activeIndex = Players.IndexOf(ActivePlayer);
+        var nextIndex = (activeIndex + 1) % Players.Count;
+        ActivePlayer.PlayerTurnFinished();
+        ActivePlayer = Players.ElementAt(nextIndex);
+    }
 }
