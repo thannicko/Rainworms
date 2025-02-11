@@ -9,6 +9,9 @@ public partial class KeepDiceState : State
     
     [Export]
     public Container KeepDiceContainer { get; set; }
+    
+    [Export]
+    public DeckController DeckController { get; set; }
 
     private TurnStateMachine turnStateMachine { get => (TurnStateMachine)stateMachine; }
 
@@ -21,7 +24,8 @@ public partial class KeepDiceState : State
         turnStateMachine.keptDices[keepDice] = turnStateMachine.diceFrequencies[keepDice];
         turnStateMachine.NrDicesLeft -= turnStateMachine.keptDices[keepDice];
         turnStateMachine.SetPointsEarned(GetPointsEarned(turnStateMachine.keptDices));
-        if (turnStateMachine.NrDicesLeft <= 0 && turnStateMachine.HasBoughtTileThisTurn)
+        bool cannotBuyAnyTile = turnStateMachine.HasBoughtTileThisTurn || DeckController.HasNothingToBuy();
+        if (turnStateMachine.NrDicesLeft <= 0 && cannotBuyAnyTile)
         {
             turnStateMachine.ChangeToState("StopThrowState");
         }
@@ -39,7 +43,9 @@ public partial class KeepDiceState : State
     {
         int sum = 0;
         foreach (int dice in diceToNrOfThrows.Keys)
+        {
             sum += turnStateMachine.diceToPoints[dice] * diceToNrOfThrows[dice];
+        }
         return sum;
     }
 

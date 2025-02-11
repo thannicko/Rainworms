@@ -83,10 +83,6 @@ public partial class WaitRethrowState : State
 
     private bool IsStealPossible()
     {
-        // rig code
-        if (PlayerController.Instance.ActivePlayer.Name == "annick")
-            turnStateMachine.SetPointsEarned(25);
-
         possibleSteals.Clear();
         possibleSteals = PlayerController.Instance.Players.Where(
             player => player.TilesBought.LastOrDefault() != null &&

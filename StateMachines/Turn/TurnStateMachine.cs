@@ -51,7 +51,6 @@ public partial class TurnStateMachine : StateMachine
     {
         if (!HasBoughtTileThisTurn)
         {
-            SetPointsEarned(0);
             Player.TilesBought.Add(tile);
             HasBoughtTileThisTurn = true;
         }
@@ -71,6 +70,7 @@ public partial class TurnStateMachine : StateMachine
         keptDices.Clear();
         NrDicesLeft = MaxThrows;
         HasBoughtTileThisTurn = false;
+        SetPointsEarned(0);
     }
 
     public void ResetThrowCounts()
