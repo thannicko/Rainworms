@@ -13,6 +13,7 @@ public partial class EndTurnState : State
 
     public override async void Enter(object[] data)
     {
+        var lastPlayer = PlayerController.Instance.ActivePlayer;
         PlayerController.Instance.ActivePlayerFinished();
 
         if (IsGameFinished())
@@ -23,7 +24,7 @@ public partial class EndTurnState : State
         }
         else
         {
-            PromptLabel.Text = "Turn finished for " + PlayerController.Instance.ActivePlayer.Name;
+            PromptLabel.Text = "Turn finished for " + lastPlayer.Name;
             await ToSignal(GetTree().CreateTimer(1.0), Timer.SignalName.Timeout);
 
             PromptLabel.Text = "*** Next turn: " + PlayerController.Instance.ActivePlayer.Name + " ***";

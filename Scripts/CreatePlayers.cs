@@ -20,6 +20,7 @@ public partial class CreatePlayers : Control
 		AddButton.ButtonDown += OnAddButtonDown;
 		StartButton.ButtonDown += OnStartButtonDown;
 		PlayersInGameLabel.Hide();
+		StartButton.Disabled = true;
 	}
 
 	private void OnAddButtonDown()
@@ -27,6 +28,7 @@ public partial class CreatePlayers : Control
 		PlayerController.Instance.AddPlayer(NameEntry.Text);
 		NameEntry.Text = "";
 		UpdatePlayersInGame();
+		StartButton.Disabled = PlayerController.Instance.Players.Count <= 1;
 	}
 
 	private void OnStartButtonDown()

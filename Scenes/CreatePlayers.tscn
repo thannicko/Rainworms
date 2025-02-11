@@ -1,7 +1,6 @@
-[gd_scene load_steps=3 format=3 uid="uid://bj23bosas0lp1"]
+[gd_scene load_steps=2 format=3 uid="uid://bj23bosas0lp1"]
 
 [ext_resource type="Script" path="res://Scripts/CreatePlayers.cs" id="1_6607b"]
-[ext_resource type="PackedScene" uid="uid://c4r3anhiqbtsa" path="res://Scenes/Game.tscn" id="2_q6hpm"]
 
 [node name="CreatePlayers" type="Control" node_paths=PackedStringArray("PlayersInGameLabel", "NameEntry", "AddButton", "StartButton")]
 layout_mode = 3
@@ -19,7 +18,6 @@ PlayersInGameLabel = NodePath("PlayersInGameLabel")
 NameEntry = NodePath("VBoxContainer/LineEdit")
 AddButton = NodePath("VBoxContainer/AddButton")
 StartButton = NodePath("VBoxContainer/StartButton")
-StartGameScene = ExtResource("2_q6hpm")
 
 [node name="PlayersInGameLabel" type="Label" parent="."]
 layout_mode = 1

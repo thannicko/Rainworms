@@ -49,6 +49,6 @@ public partial class StopThrowState : State
         DeckController.ReturnLastBoughtTilesToDeck(turnStateMachine.Player);
         
         await ToSignal(GetTree().CreateTimer(1.0), Timer.SignalName.Timeout);
-        turnStateMachine.ChangeToState("InitialThrowState");
+        turnStateMachine.ChangeToState("EndTurnState");
     }
 }
