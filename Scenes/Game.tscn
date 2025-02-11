@@ -1,4 +1,4 @@
-[gd_scene load_steps=19 format=3 uid="uid://c4r3anhiqbtsa"]
+[gd_scene load_steps=20 format=3 uid="uid://c4r3anhiqbtsa"]
 
 [ext_resource type="Script" path="res://StateMachines/Turn/TurnStateMachine.cs" id="1_am2hy"]
 [ext_resource type="Script" path="res://Scripts/DeckController.cs" id="1_efgpp"]
@@ -10,6 +10,7 @@
 [ext_resource type="Texture2D" uid="uid://b4j6dlwlo8ti0" path="res://Assets/six sided die.png" id="8_1koic"]
 [ext_resource type="Script" path="res://StateMachines/Turn/EndTurnState.cs" id="8_ulig8"]
 [ext_resource type="Texture2D" uid="uid://cjlia5ygewjeq" path="res://Assets/dice-worm.png" id="9_3hr2b"]
+[ext_resource type="PackedScene" uid="uid://d3sr0yq4gul84" path="res://Assets/EndGame.tscn" id="9_ojba6"]
 
 [sub_resource type="StyleBoxFlat" id="StyleBoxFlat_oy2md"]
 bg_color = Color(0.588235, 0.0431373, 0.192157, 0.431373)
@@ -120,9 +121,11 @@ ThrowDiceContainer = NodePath("../../CanvasLayer/ThrowDiceMargin/ThrowDiceContai
 DeckController = NodePath("../../DeckController")
 PlayerScoreLabel = NodePath("../../CanvasLayer/PlayerScoreLabel")
 
-[node name="EndTurnState" type="Node" parent="TurnStateMachine" node_paths=PackedStringArray("PromptLabel")]
+[node name="EndTurnState" type="Node" parent="TurnStateMachine" node_paths=PackedStringArray("PromptLabel", "DeckController")]
 script = ExtResource("8_ulig8")
 PromptLabel = NodePath("../../CanvasLayer/PromptLabel")
+DeckController = NodePath("../../DeckController")
+EndGameScene = ExtResource("9_ojba6")
 
 [node name="CanvasLayer" type="CanvasLayer" parent="."]
 

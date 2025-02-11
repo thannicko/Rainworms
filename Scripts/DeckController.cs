@@ -18,6 +18,8 @@ public partial class DeckController : Node
 
     public bool IsBuyingEnabled { get; set; }
 
+    public int NumberOfTilesLeft { get => deck.Tiles.Count; }
+
 	public override void _Ready()
     {
         DrawDeck();

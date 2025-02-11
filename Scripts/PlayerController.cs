@@ -21,12 +21,19 @@ public partial class PlayerController : Node
         }
     }
 
-    private TileDeck deck = GD.Load<TileDeck>("res://Deck.tres");
-
 	public override void _Ready()
 	{
         Instance  = this;
 	}
+
+    public Player Winner()
+    {
+        if (Players.Count > 0)
+        {
+            return Players.OrderByDescending(player => player.TotalScore).FirstOrDefault();
+        }
+        return null;
+    }
 
     public void AddPlayer(string name)
     {

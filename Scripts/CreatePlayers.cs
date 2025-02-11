@@ -15,10 +15,6 @@ public partial class CreatePlayers : Control
 	[Export]
 	public Button StartButton {get; set;}
 
-	[Export]
-	public PackedScene StartGameScene { get; set; }
-
-	// Called when the node enters the scene tree for the first time.
 	public override void _Ready()
 	{
 		AddButton.ButtonDown += OnAddButtonDown;
@@ -35,7 +31,7 @@ public partial class CreatePlayers : Control
 
 	private void OnStartButtonDown()
 	{
-		GetTree().ChangeSceneToPacked(StartGameScene);
+		GetTree().ChangeSceneToFile("res://Scenes/Game.tscn");
 	}
 	
 	private void UpdatePlayersInGame()

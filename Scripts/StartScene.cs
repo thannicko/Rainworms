@@ -2,8 +2,6 @@ using Godot;
 
 public partial class StartScene : Control
 {
-	[Export]
-	public PackedScene CreatePlayersScene { get; set; }
 
 	private Button StartButton;
 
@@ -15,6 +13,6 @@ public partial class StartScene : Control
 
 	private void ChangeToStartGameScene()
 	{
-		GetTree().ChangeSceneToPacked(CreatePlayersScene);
+		GetTree().ChangeSceneToFile("res://Scenes/CreatePlayers.tscn");
 	}
 }
