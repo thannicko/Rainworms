@@ -24,8 +24,6 @@ public partial class PlayerController : Node
 	public override void _Ready()
 	{
         Instance  = this;
-        AddPlayer("1");
-        AddPlayer("2");
 	}
 
     public Player Winner()
