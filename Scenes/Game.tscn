@@ -1,4 +1,4 @@
-[gd_scene load_steps=20 format=3 uid="uid://c4r3anhiqbtsa"]
+[gd_scene load_steps=21 format=3 uid="uid://c4r3anhiqbtsa"]
 
 [ext_resource type="Script" path="res://StateMachines/Turn/TurnStateMachine.cs" id="1_am2hy"]
 [ext_resource type="Script" path="res://Scripts/DeckController.cs" id="1_efgpp"]
@@ -11,6 +11,7 @@
 [ext_resource type="Script" path="res://StateMachines/Turn/EndTurnState.cs" id="8_ulig8"]
 [ext_resource type="Texture2D" uid="uid://cjlia5ygewjeq" path="res://Assets/dice-worm.png" id="9_3hr2b"]
 [ext_resource type="PackedScene" uid="uid://d3sr0yq4gul84" path="res://Assets/EndGame.tscn" id="9_ojba6"]
+[ext_resource type="PackedScene" uid="uid://vnmmv5r8vbd4" path="res://Scenes/ThrownDice.tscn" id="11_hdfj5"]
 
 [sub_resource type="StyleBoxFlat" id="StyleBoxFlat_oy2md"]
 bg_color = Color(0.588235, 0.0431373, 0.192157, 0.431373)
@@ -102,6 +103,7 @@ ThrowDiceButton = NodePath("../../CanvasLayer/ActionsContainer/ThrowDiceButton")
 ThrowDiceContainer = NodePath("../../CanvasLayer/ThrowDiceMargin/ThrowDiceContainer")
 DiceAnimation = NodePath("../../CanvasLayer/DiceThrowAnimation")
 PromptLabel = NodePath("../../CanvasLayer/PromptLabel")
+ThrownDiceScene = "res://Scenes/ThrownDice.tscn"
 
 [node name="KeepDiceState" type="Node" parent="TurnStateMachine" node_paths=PackedStringArray("ThrowDiceContainer", "KeepDiceContainer", "DeckController")]
 script = ExtResource("4_cdyae")
@@ -196,10 +198,10 @@ anchor_left = 0.5
 anchor_top = 0.5
 anchor_right = 0.5
 anchor_bottom = 0.5
-offset_left = -319.0
-offset_top = 38.0
-offset_right = 321.0
-offset_bottom = 98.0
+offset_left = -190.0
+offset_top = 36.0
+offset_right = 190.0
+offset_bottom = 86.0
 grow_horizontal = 2
 grow_vertical = 2
 
@@ -208,12 +210,26 @@ custom_minimum_size = Vector2(0, 50)
 layout_mode = 2
 alignment = 1
 
-[node name="TextureRect" type="TextureRect" parent="CanvasLayer/ThrowDiceMargin/ThrowDiceContainer"]
+[node name="TextureRect" parent="CanvasLayer/ThrowDiceMargin/ThrowDiceContainer" instance=ExtResource("11_hdfj5")]
 layout_mode = 2
-texture = ExtResource("9_3hr2b")
-expand_mode = 3
+
+[node name="TextureRect2" parent="CanvasLayer/ThrowDiceMargin/ThrowDiceContainer" instance=ExtResource("11_hdfj5")]
+layout_mode = 2
+
+[node name="TextureRect3" parent="CanvasLayer/ThrowDiceMargin/ThrowDiceContainer" instance=ExtResource("11_hdfj5")]
+layout_mode = 2
+
+[node name="TextureRect4" parent="CanvasLayer/ThrowDiceMargin/ThrowDiceContainer" instance=ExtResource("11_hdfj5")]
+layout_mode = 2
+
+[node name="TextureRect5" parent="CanvasLayer/ThrowDiceMargin/ThrowDiceContainer" instance=ExtResource("11_hdfj5")]
+layout_mode = 2
+
+[node name="TextureRect6" parent="CanvasLayer/ThrowDiceMargin/ThrowDiceContainer" instance=ExtResource("11_hdfj5")]
+layout_mode = 2
 
 [node name="DiceThrowAnimation" type="AnimatedSprite2D" parent="CanvasLayer"]
+visible = false
 texture_filter = 1
 position = Vector2(592, 378)
 scale = Vector2(5, 5)
@@ -228,20 +244,22 @@ anchor_left = 0.5
 anchor_top = 0.5
 anchor_right = 0.5
 anchor_bottom = 0.5
-offset_left = -319.0
-offset_top = 114.0
-offset_right = 321.0
-offset_bottom = 164.0
+offset_left = -320.0
+offset_top = 108.0
+offset_right = 320.0
+offset_bottom = 158.0
 grow_horizontal = 2
 grow_vertical = 2
 alignment = 1
 
 [node name="ThrowDiceButton" type="Button" parent="CanvasLayer/ActionsContainer"]
+custom_minimum_size = Vector2(150, 0)
 layout_mode = 2
 text = "Roll dice"
 
 [node name="StealButton" type="Button" parent="CanvasLayer/ActionsContainer"]
 visible = false
+custom_minimum_size = Vector2(150, 0)
 layout_mode = 2
 text = "Steal"
 
@@ -252,27 +270,27 @@ anchor_left = 0.5
 anchor_top = 0.5
 anchor_right = 0.5
 anchor_bottom = 0.5
-offset_left = 107.0
-offset_top = 32.0
-offset_right = 263.0
-offset_bottom = 210.0
+offset_left = 176.0
+offset_top = 110.0
+offset_right = 332.0
+offset_bottom = 288.0
 grow_horizontal = 2
 grow_vertical = 2
 alignment = 1
 
 [node name="TileContainer" type="HFlowContainer" parent="CanvasLayer"]
 custom_minimum_size = Vector2(600, 200)
-anchors_preset = 8
+anchors_preset = 7
 anchor_left = 0.5
-anchor_top = 0.5
+anchor_top = 1.0
 anchor_right = 0.5
-anchor_bottom = 0.5
-offset_left = -300.0
-offset_top = -250.0
-offset_right = 300.0
-offset_bottom = -50.0
+anchor_bottom = 1.0
+offset_left = -272.0
+offset_top = -525.0
+offset_right = 328.0
+offset_bottom = -325.0
 grow_horizontal = 2
-grow_vertical = 2
+grow_vertical = 0
 
 [node name="BoughtTilesContainer" type="VFlowContainer" parent="CanvasLayer"]
 custom_minimum_size = Vector2(150, 5)

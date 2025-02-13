@@ -1,0 +1,10 @@
+[gd_scene load_steps=3 format=3 uid="uid://vnmmv5r8vbd4"]
+
+[ext_resource type="Script" path="res://Scripts/ThrownDice.cs" id="1_4dnl2"]
+[ext_resource type="Texture2D" uid="uid://cjlia5ygewjeq" path="res://Assets/dice-worm.png" id="1_k6cdb"]
+
+[node name="TextureRect" type="TextureRect"]
+custom_minimum_size = Vector2(24, 24)
+texture = ExtResource("1_k6cdb")
+expand_mode = 3
+script = ExtResource("1_4dnl2")

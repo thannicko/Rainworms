@@ -16,6 +16,9 @@ public partial class ThrowingState : State
     
     [Export]
     public Label PromptLabel { get; set; }
+    
+    [Export(PropertyHint.File, "*.tscn")]
+    public string ThrownDiceScene { get; set; }
 
     private TurnStateMachine turnStateMachine { get => (TurnStateMachine)stateMachine; }
 
@@ -32,6 +35,10 @@ public partial class ThrowingState : State
 
     public override void Exit()
     {
+        foreach (ThrownDice dice in diceTexturesToValue.Keys)
+        {
+            dice.DiceClicked -= OnDiceClicked;
+        }
     }
 
     private void StartThrow()
@@ -81,38 +88,27 @@ public partial class ThrowingState : State
 
     private void SpawnDiceTexture(int diceValue)
     {
-        var newDice = new TextureRect();
-        newDice.Texture = GD.Load<Texture2D>(turnStateMachine.diceToTextures[diceValue]);
-        newDice.TextureFilter = CanvasItem.TextureFilterEnum.Nearest;
-        newDice.ExpandMode = TextureRect.ExpandModeEnum.FitWidthProportional;
-        if (IsAllowedToKeepDice(diceValue))
-        {
-            newDice.GuiInput += (InputEvent @event) => OnGuiInputDice(@event, diceValue);
-        }
-        else
-        {
-            newDice.Modulate = new Godot.Color("WEB_GRAY");
-        }
+        var newDice = GD.Load<PackedScene>(ThrownDiceScene).Instantiate() as ThrownDice;
+        newDice.Initialize(
+            diceValue: diceValue,
+            textureFile: turnStateMachine.diceToTextures[diceValue]
+        );
+        newDice.EnableClick(IsAllowedToKeepDice(diceValue));
+        newDice.DiceClicked += OnDiceClicked;
         ThrowDiceContainer.AddChild(newDice);
         diceTexturesToValue[newDice] = diceValue;
     }
 
-    private void OnGuiInputDice(InputEvent @event, int dice)
+    private void OnDiceClicked(ThrownDice dice)
     {
-        if (turnStateMachine.currentState != this)
-            return;
-
-        if (@event.IsPressed() && @event is InputEventMouseButton)
-        {
-            object[] stateChangeData = new object[1];
-            stateChangeData[0] = new Dictionary<string, object> {
-                { "dice_value", dice },
-                { "dice_textures" , diceTexturesToValue },
-            }; 
-            turnStateMachine.ChangeToState(
-                newStateName: "KeepDiceState",
-                data: stateChangeData);
-        }
+        object[] stateChangeData = new object[1];
+        stateChangeData[0] = new Dictionary<string, object> {
+            { "dice_value", dice.DiceValue },
+            { "dice_textures" , diceTexturesToValue },
+        }; 
+        turnStateMachine.ChangeToState(
+            newStateName: "KeepDiceState",
+            data: stateChangeData);
     }
 
     private bool IsAllowedToKeepDice(int diceValue)
