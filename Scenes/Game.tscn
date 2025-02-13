@@ -211,21 +211,27 @@ layout_mode = 2
 alignment = 1
 
 [node name="TextureRect" parent="CanvasLayer/ThrowDiceMargin/ThrowDiceContainer" instance=ExtResource("11_hdfj5")]
+visible = false
 layout_mode = 2
 
 [node name="TextureRect2" parent="CanvasLayer/ThrowDiceMargin/ThrowDiceContainer" instance=ExtResource("11_hdfj5")]
+visible = false
 layout_mode = 2
 
 [node name="TextureRect3" parent="CanvasLayer/ThrowDiceMargin/ThrowDiceContainer" instance=ExtResource("11_hdfj5")]
+visible = false
 layout_mode = 2
 
 [node name="TextureRect4" parent="CanvasLayer/ThrowDiceMargin/ThrowDiceContainer" instance=ExtResource("11_hdfj5")]
+visible = false
 layout_mode = 2
 
 [node name="TextureRect5" parent="CanvasLayer/ThrowDiceMargin/ThrowDiceContainer" instance=ExtResource("11_hdfj5")]
+visible = false
 layout_mode = 2
 
 [node name="TextureRect6" parent="CanvasLayer/ThrowDiceMargin/ThrowDiceContainer" instance=ExtResource("11_hdfj5")]
+visible = false
 layout_mode = 2
 
 [node name="DiceThrowAnimation" type="AnimatedSprite2D" parent="CanvasLayer"]
