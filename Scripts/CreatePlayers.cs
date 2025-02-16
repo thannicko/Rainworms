@@ -14,6 +14,9 @@ public partial class CreatePlayers : Control
 	
 	[Export]
 	public Button StartButton {get; set;}
+	
+	[Export]
+	public AudioStreamPlayer ButtonClickEffect {get; set;}
 
 	public override void _Ready()
 	{
@@ -33,6 +36,7 @@ public partial class CreatePlayers : Control
 
 	private void OnAddButtonDown()
 	{
+		ButtonClickEffect.Play();
 		PlayerController.Instance.AddPlayer(NameEntry.Text);
 		NameEntry.Text = "";
 		UpdatePlayersInGame();
@@ -41,7 +45,9 @@ public partial class CreatePlayers : Control
 
 	private void OnStartButtonDown()
 	{
-		GetTree().ChangeSceneToFile("res://Scenes/Game.tscn");
+		ButtonClickEffect.Play();
+		ButtonClickEffect.Finished += () => 
+			GetTree().ChangeSceneToFile("res://Scenes/Game.tscn");
 	}
 	
 	private void UpdatePlayersInGame()

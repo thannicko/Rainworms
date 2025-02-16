@@ -30,6 +30,9 @@ public partial class InitialThrowState : State
 
     [Export]
     public DeckController DeckController { get; set; }
+	
+	[Export]
+	public AudioStreamPlayer ButtonClickEffect {get; set;}
 
     private TurnStateMachine turnStateMachine { get => (TurnStateMachine)stateMachine; }
 
@@ -72,6 +75,7 @@ public partial class InitialThrowState : State
 
     private void OnThrowDiceButtonDown()
     {
+        ButtonClickEffect.Play();
         turnStateMachine.ChangeToState("ThrowingState");
     }
 

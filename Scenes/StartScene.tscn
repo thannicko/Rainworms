@@ -1,6 +1,7 @@
-[gd_scene load_steps=2 format=3 uid="uid://dlrstor0joawg"]
+[gd_scene load_steps=3 format=3 uid="uid://dlrstor0joawg"]
 
 [ext_resource type="Script" path="res://Scripts/StartScene.cs" id="1_sqt1x"]
+[ext_resource type="AudioStream" uid="uid://cbg0rnirbok37" path="res://Assets/ButtonClickEffect.wav" id="2_2emu4"]
 
 [node name="StartScene" type="Control"]
 layout_mode = 3
@@ -38,3 +39,6 @@ text = "Start game"
 visible = false
 layout_mode = 2
 text = "Tutorial"
+
+[node name="ButtonClickEffect" type="AudioStreamPlayer" parent="."]
+stream = ExtResource("2_2emu4")

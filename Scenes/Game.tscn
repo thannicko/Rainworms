@@ -1,17 +1,19 @@
-[gd_scene load_steps=21 format=3 uid="uid://c4r3anhiqbtsa"]
+[gd_scene load_steps=23 format=3 uid="uid://c4r3anhiqbtsa"]
 
-[ext_resource type="Script" path="res://StateMachines/Turn/TurnStateMachine.cs" id="1_am2hy"]
 [ext_resource type="Script" path="res://Scripts/DeckController.cs" id="1_efgpp"]
-[ext_resource type="Script" path="res://StateMachines/Turn/InitialThrowState.cs" id="2_rp1xf"]
-[ext_resource type="Script" path="res://StateMachines/Turn/ThrowingState.cs" id="3_5ii2w"]
-[ext_resource type="Script" path="res://StateMachines/Turn/KeepDiceState.cs" id="4_cdyae"]
-[ext_resource type="Script" path="res://StateMachines/Turn/StopThrowState.cs" id="5_cqkhe"]
-[ext_resource type="Script" path="res://StateMachines/Turn/WaitRethrowState.cs" id="6_pjf3t"]
+[ext_resource type="Script" path="res://Scripts/StateMachines/Turn/TurnStateMachine.cs" id="2_8cbo4"]
+[ext_resource type="Script" path="res://Scripts/StateMachines/Turn/InitialThrowState.cs" id="3_ly248"]
+[ext_resource type="Script" path="res://Scripts/StateMachines/Turn/ThrowingState.cs" id="4_hmht7"]
+[ext_resource type="Script" path="res://Scripts/StateMachines/Turn/KeepDiceState.cs" id="5_d6rbc"]
+[ext_resource type="Script" path="res://Scripts/StateMachines/Turn/StopThrowState.cs" id="6_bqnod"]
+[ext_resource type="Script" path="res://Scripts/StateMachines/Turn/WaitRethrowState.cs" id="7_k4xfe"]
 [ext_resource type="Texture2D" uid="uid://b4j6dlwlo8ti0" path="res://Assets/six sided die.png" id="8_1koic"]
-[ext_resource type="Script" path="res://StateMachines/Turn/EndTurnState.cs" id="8_ulig8"]
+[ext_resource type="Script" path="res://Scripts/StateMachines/Turn/EndTurnState.cs" id="8_fuv1v"]
 [ext_resource type="Texture2D" uid="uid://cjlia5ygewjeq" path="res://Assets/dice-worm.png" id="9_3hr2b"]
 [ext_resource type="PackedScene" uid="uid://d3sr0yq4gul84" path="res://Assets/EndGame.tscn" id="9_ojba6"]
 [ext_resource type="PackedScene" uid="uid://vnmmv5r8vbd4" path="res://Scenes/ThrownDice.tscn" id="11_hdfj5"]
+[ext_resource type="AudioStream" uid="uid://cbg0rnirbok37" path="res://Assets/ButtonClickEffect.wav" id="13_001el"]
+[ext_resource type="AudioStream" uid="uid://bpfl6bxbvy5ax" path="res://Assets/DiceRollingEffect.wav" id="14_i765o"]
 
 [sub_resource type="StyleBoxFlat" id="StyleBoxFlat_oy2md"]
 bg_color = Color(0.588235, 0.0431373, 0.192157, 0.431373)
@@ -81,12 +83,12 @@ BoughtTilesContainer = NodePath("../CanvasLayer/BoughtTilesContainer")
 TurnController = NodePath("../TurnStateMachine")
 
 [node name="TurnStateMachine" type="Node" parent="." node_paths=PackedStringArray("TotalLabel", "NrDicesLeftLabel")]
-script = ExtResource("1_am2hy")
+script = ExtResource("2_8cbo4")
 TotalLabel = NodePath("../CanvasLayer/KeepDiceContianer/TotalLabel")
 NrDicesLeftLabel = NodePath("../CanvasLayer/KeepDiceContianer/NrDicesLeftLabel")
 
-[node name="InitialThrowState" type="Node" parent="TurnStateMachine" node_paths=PackedStringArray("ThrowDiceButton", "ThrowDiceContainer", "KeepDiceContainer", "BoughtTilesContainer", "TotalLabel", "PromptLabel", "PlayerNameLabel", "ScoreboardLabel", "DeckController")]
-script = ExtResource("2_rp1xf")
+[node name="InitialThrowState" type="Node" parent="TurnStateMachine" node_paths=PackedStringArray("ThrowDiceButton", "ThrowDiceContainer", "KeepDiceContainer", "BoughtTilesContainer", "TotalLabel", "PromptLabel", "PlayerNameLabel", "ScoreboardLabel", "DeckController", "ButtonClickEffect")]
+script = ExtResource("3_ly248")
 ThrowDiceButton = NodePath("../../CanvasLayer/ActionsContainer/ThrowDiceButton")
 ThrowDiceContainer = NodePath("../../CanvasLayer/ThrowDiceMargin/ThrowDiceContainer")
 KeepDiceContainer = NodePath("../../CanvasLayer/KeepDiceContianer/KeepDiceContainer")
@@ -96,29 +98,31 @@ PromptLabel = NodePath("../../CanvasLayer/PromptLabel")
 PlayerNameLabel = NodePath("../../CanvasLayer/PlayerNameLabel")
 ScoreboardLabel = NodePath("../../CanvasLayer/ScoreBoardLabel")
 DeckController = NodePath("../../DeckController")
+ButtonClickEffect = NodePath("../../ButtonClickEffect")
 
-[node name="ThrowingState" type="Node" parent="TurnStateMachine" node_paths=PackedStringArray("ThrowDiceButton", "ThrowDiceContainer", "DiceAnimation", "PromptLabel")]
-script = ExtResource("3_5ii2w")
+[node name="ThrowingState" type="Node" parent="TurnStateMachine" node_paths=PackedStringArray("ThrowDiceButton", "ThrowDiceContainer", "DiceAnimation", "PromptLabel", "DiceThrowingEffect")]
+script = ExtResource("4_hmht7")
 ThrowDiceButton = NodePath("../../CanvasLayer/ActionsContainer/ThrowDiceButton")
 ThrowDiceContainer = NodePath("../../CanvasLayer/ThrowDiceMargin/ThrowDiceContainer")
 DiceAnimation = NodePath("../../CanvasLayer/DiceThrowAnimation")
 PromptLabel = NodePath("../../CanvasLayer/PromptLabel")
 ThrownDiceScene = "res://Scenes/ThrownDice.tscn"
+DiceThrowingEffect = NodePath("../../DiceThrowingEffect")
 
 [node name="KeepDiceState" type="Node" parent="TurnStateMachine" node_paths=PackedStringArray("ThrowDiceContainer", "KeepDiceContainer", "DeckController")]
-script = ExtResource("4_cdyae")
+script = ExtResource("5_d6rbc")
 ThrowDiceContainer = NodePath("../../CanvasLayer/ThrowDiceMargin/ThrowDiceContainer")
 KeepDiceContainer = NodePath("../../CanvasLayer/KeepDiceContianer/KeepDiceContainer")
 DeckController = NodePath("../../DeckController")
 
 [node name="StopThrowState" type="Node" parent="TurnStateMachine" node_paths=PackedStringArray("PromptLabel", "ThrowDiceButton", "DeckController")]
-script = ExtResource("5_cqkhe")
+script = ExtResource("6_bqnod")
 PromptLabel = NodePath("../../CanvasLayer/PromptLabel")
 ThrowDiceButton = NodePath("../../CanvasLayer/ActionsContainer/ThrowDiceButton")
 DeckController = NodePath("../../DeckController")
 
 [node name="WaitRethrowState" type="Node" parent="TurnStateMachine" node_paths=PackedStringArray("PromptLabel", "ThrowDiceButton", "StealButton", "ThrowDiceContainer", "StealTargetsContainer", "DeckController")]
-script = ExtResource("6_pjf3t")
+script = ExtResource("7_k4xfe")
 PromptLabel = NodePath("../../CanvasLayer/PromptLabel")
 ThrowDiceButton = NodePath("../../CanvasLayer/ActionsContainer/ThrowDiceButton")
 StealButton = NodePath("../../CanvasLayer/ActionsContainer/StealButton")
@@ -127,7 +131,7 @@ StealTargetsContainer = NodePath("../../CanvasLayer/StealTargetsContainer")
 DeckController = NodePath("../../DeckController")
 
 [node name="EndTurnState" type="Node" parent="TurnStateMachine" node_paths=PackedStringArray("PromptLabel", "DeckController", "ThrowDiceButton")]
-script = ExtResource("8_ulig8")
+script = ExtResource("8_fuv1v")
 PromptLabel = NodePath("../../CanvasLayer/PromptLabel")
 DeckController = NodePath("../../DeckController")
 EndGameScene = ExtResource("9_ojba6")
@@ -319,3 +323,9 @@ offset_right = 1146.0
 offset_bottom = 30.0
 text = "Wormboard"
 vertical_alignment = 1
+
+[node name="ButtonClickEffect" type="AudioStreamPlayer" parent="."]
+stream = ExtResource("13_001el")
+
+[node name="DiceThrowingEffect" type="AudioStreamPlayer" parent="."]
+stream = ExtResource("14_i765o")

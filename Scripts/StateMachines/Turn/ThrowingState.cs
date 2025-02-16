@@ -19,6 +19,9 @@ public partial class ThrowingState : State
     
     [Export(PropertyHint.File, "*.tscn")]
     public string ThrownDiceScene { get; set; }
+    
+    [Export]
+    public AudioStreamPlayer DiceThrowingEffect { get; set; }
 
     private TurnStateMachine turnStateMachine { get => (TurnStateMachine)stateMachine; }
 
@@ -26,6 +29,7 @@ public partial class ThrowingState : State
 
     public override void Enter(object[] data)
     {
+        DiceThrowingEffect.Play();
         diceTexturesToValue.Clear();
         turnStateMachine.ResetThrowCounts();
         ThrowDiceButton.Disabled = true;
