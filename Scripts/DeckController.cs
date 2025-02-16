@@ -12,6 +12,9 @@ public partial class DeckController : Node
     
     [Export]
     public TurnStateMachine TurnController { get; set; }
+	
+	[Export]
+	public AudioStreamPlayer ButtonClickEffect { get; set; }
     
     [Signal]
     public delegate void TileBoughtEventHandler(WormTile tile);
@@ -118,6 +121,7 @@ public partial class DeckController : Node
         if (!IsBuyingEnabled || BoughtTilesContainer.GetChildren().Contains(button))
             return;
 
+        ButtonClickEffect.Play();
         deck.Tiles.Remove(tile);
         TilesContainer.RemoveChild(button);
         AddToBoughtTile(tile, button);

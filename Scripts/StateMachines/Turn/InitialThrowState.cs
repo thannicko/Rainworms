@@ -32,7 +32,7 @@ public partial class InitialThrowState : State
     public DeckController DeckController { get; set; }
 	
 	[Export]
-	public AudioStreamPlayer ButtonClickEffect {get; set;}
+	public AudioStreamPlayer ButtonClickEffect { get; set; }
 
     private TurnStateMachine turnStateMachine { get => (TurnStateMachine)stateMachine; }
 

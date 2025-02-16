@@ -22,6 +22,9 @@ public partial class ThrowingState : State
     
     [Export]
     public AudioStreamPlayer DiceThrowingEffect { get; set; }
+	
+	[Export]
+	public AudioStreamPlayer ButtonClickEffect { get; set; }
 
     private TurnStateMachine turnStateMachine { get => (TurnStateMachine)stateMachine; }
 
@@ -105,6 +108,7 @@ public partial class ThrowingState : State
 
     private void OnDiceClicked(ThrownDice dice)
     {
+        ButtonClickEffect.Play();
         object[] stateChangeData = new object[1];
         stateChangeData[0] = new Dictionary<string, object> {
             { "dice_value", dice.DiceValue },

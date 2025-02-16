@@ -15,6 +15,9 @@ public partial class EndGame : Control
     [Export]
     public Button ExitButton { get; set; }
 	
+	[Export]
+	public AudioStreamPlayer ButtonClickEffect { get; set; }
+	
 	public override void _Ready()
 	{
 		WinnerLabel.Text = PlayerController.Instance.Winner() == null ? "No winner" : "'" + PlayerController.Instance.Winner().Name + "' won!";
@@ -25,19 +28,16 @@ public partial class EndGame : Control
 
 	private void OnRestartButtonDown()
 	{
-		try
-		{
+		ButtonClickEffect.Play();
+		ButtonClickEffect.Finished += () => 
 			GetTree().ChangeSceneToFile("res://Scenes/CreatePlayers.tscn");
-		}
-		catch (Exception e)
-		{
-			GD.PrintErr(e);
-		}
 	}
 
 	private void OnExitButtonDown()
 	{
-		GetTree().Quit();
+		ButtonClickEffect.Play();
+		ButtonClickEffect.Finished += () => 
+			GetTree().Quit();
 	}
 
     private void UpdateScoreBoard()

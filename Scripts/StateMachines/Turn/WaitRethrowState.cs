@@ -21,6 +21,9 @@ public partial class WaitRethrowState : State
 
     [Export]
     public DeckController DeckController { get; set; }
+	
+	[Export]
+	public AudioStreamPlayer ButtonClickEffect { get; set; }
 
     private TurnStateMachine turnStateMachine { get => (TurnStateMachine)stateMachine; }
 
@@ -36,7 +39,7 @@ public partial class WaitRethrowState : State
         }
 
         CheckAndRenderStealCondition();
-        StealButton.ButtonDown += StealTargetsContainer.Show;
+        StealButton.ButtonDown += OnStealButtonDown;
 
         DeckController.IsBuyingEnabled = true;
         DeckController.TileBought += OnTileBought;
@@ -47,7 +50,7 @@ public partial class WaitRethrowState : State
         DeckController.IsBuyingEnabled = false;
         ThrowDiceButton.ButtonDown -= OnThrowDiceButtonDown;
         DeckController.TileBought -= OnTileBought;
-        StealButton.ButtonDown -= StealTargetsContainer.Show;
+        StealButton.ButtonDown -= OnStealButtonDown;
         StealButton.Hide();
         StealTargetsContainer.Hide();
     }
@@ -73,8 +76,15 @@ public partial class WaitRethrowState : State
         }
     }
 
+    private void OnStealButtonDown()
+    {
+        ButtonClickEffect.Play();
+        StealTargetsContainer.Show();
+    }
+
     private void StealFrom(Player target)
     {
+        ButtonClickEffect.Play();
         WormTile tile = target.PopLastTile();
         PromptLabel.Text = PlayerController.Instance.ActivePlayer.Name
             + " stole tile '" + tile.Cost + "' from "
@@ -105,6 +115,7 @@ public partial class WaitRethrowState : State
 
     private void OnThrowDiceButtonDown()
     {
+        ButtonClickEffect.Play();
         turnStateMachine.ChangeToState("ThrowingState");
     }
 
